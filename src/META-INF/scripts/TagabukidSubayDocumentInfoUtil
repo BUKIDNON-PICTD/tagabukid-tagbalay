@@ -1,0 +1,49 @@
+import com.rameses.rcp.annotations.*
+import com.rameses.rcp.common.*
+import com.rameses.osiris2.client.*
+import com.rameses.osiris2.common.*
+import java.rmi.server.*;
+import com.rameses.util.*;
+
+public class TagabukidSubayDocumentInfoUtil {
+     
+    @Caller
+    def caller;
+    def handler;
+
+    def getEntity() {
+        return caller.entity;
+    }
+
+
+    def listModel = [
+       fetchList: { o-> 
+            return entity.docinfos; 
+        }
+    ] as BasicListModel;
+
+    def update() {
+        def e = [:];
+        e.putAll( entity );
+        return InvokerUtil.lookupOpener( entity.documenttype.handler + ":docinfo", [
+            entity: e,
+            handler:{ result ->
+               
+                entity.docinfos = result.infos;
+                listModel.reload();
+                if(handler) handler();
+            }
+        ]);
+      
+    }
+
+
+    void reset(){
+        listModel.reload();
+    }
+
+    void refresh(){
+        listModel.reload();
+    }
+    
+}

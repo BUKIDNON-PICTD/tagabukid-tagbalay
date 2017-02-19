@@ -1,17 +1,18 @@
 <folders>
     <folder id="explorer">
         <folder id="txn">
-            <folder id="isstranscation" caption="ISS" index="1"/>
+            <folder id="isstranscation" caption="Integrated Survey System" index="1"/>
         </folder>
         <folder id="master">
             <folder id="issmaster" caption="ISS Master" index="1"/>
         </folder>
         <folder id="rulemgmt" caption="Rule Management">
-            <folder id="iss" caption="ISS" index="5"/>
+            <folder id="iss" caption="Integrated Survey System" index="5"/>
         </folder>  
     </folder> 
     <folder id="home">
-        <folder id="iss" caption="ISS">
+        <folder id="iss" caption="Integrated Survey System">
+            <folder id="hh" caption="Household" index="4"/>
             <folder id="master" caption="Master File" index="5"/>
         </folder>
     </folder>
