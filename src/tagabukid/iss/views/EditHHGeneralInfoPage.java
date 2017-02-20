@@ -33,108 +33,46 @@ public class EditHHGeneralInfoPage extends javax.swing.JPanel {
     private void initComponents() {
 
         xFormPanel1 = new com.rameses.rcp.control.XFormPanel();
-        xLookupField1 = new com.rameses.rcp.control.XLookupField();
-        xTextField1 = new com.rameses.rcp.control.XTextField();
-        xLabel1 = new com.rameses.rcp.control.XLabel();
-        xTextField2 = new com.rameses.rcp.control.XTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        xTextArea1 = new com.rameses.rcp.control.XTextArea();
-        xTextField3 = new com.rameses.rcp.control.XTextField();
-        xSubFormPanel1 = new com.rameses.rcp.control.XSubFormPanel();
+        xDateField2 = new com.rameses.rcp.control.XDateField();
+        entityLookup2 = new com.rameses.entity.components.EntityLookup();
 
-        com.rameses.rcp.control.border.XTitledBorder xTitledBorder1 = new com.rameses.rcp.control.border.XTitledBorder();
-        xTitledBorder1.setTitle("Document Information");
-        xFormPanel1.setBorder(xTitledBorder1);
+        xFormPanel1.setCaptionPadding(new java.awt.Insets(0, 5, 0, 5));
+        xFormPanel1.setCaptionWidth(180);
 
-        xLookupField1.setText("#{entity.documenttype.name}");
-        xLookupField1.setCaption("Document Type");
-        xLookupField1.setCaptionWidth(120);
-        xLookupField1.setExpression("#{entity.documenttype.name}");
-        xLookupField1.setHandler("lookupDocumentType");
-        xLookupField1.setHint("Select Documen Type");
-        xLookupField1.setName("entity.documenttype"); // NOI18N
-        xLookupField1.setPreferredSize(new java.awt.Dimension(500, 20));
-        xLookupField1.setRequired(true);
-        xFormPanel1.add(xLookupField1);
+        xDateField2.setCaption("Petsa sa Pagpangutana");
+        xDateField2.setName("entity.dtfiled"); // NOI18N
+        xDateField2.setRequired(true);
+        xFormPanel1.add(xDateField2);
 
-        xTextField1.setCaption("Document Title");
-        xTextField1.setCaptionFontStyle("");
-        xTextField1.setCaptionWidth(120);
-        xTextField1.setHint("Enter the title of the document (check title hint for sample title)");
-        xTextField1.setName("entity.title"); // NOI18N
-        xTextField1.setPreferredSize(new java.awt.Dimension(500, 20));
-        xTextField1.setRequired(true);
-        xFormPanel1.add(xTextField1);
-
-        xLabel1.setCaption("Sample Title");
-        xLabel1.setCaptionWidth(120);
-        xLabel1.setDepends(new String[] {"entity.documenttype"});
-        xLabel1.setEnabled(false);
-        xLabel1.setExpression("#{entity.documenttype.description}");
-        xLabel1.setPreferredSize(new java.awt.Dimension(0, 16));
-        xFormPanel1.add(xLabel1);
-
-        xTextField2.setCaption("Document Author");
-        xTextField2.setCaptionWidth(120);
-        xTextField2.setHint("Name of the document author");
-        xTextField2.setName("entity.author"); // NOI18N
-        xTextField2.setPreferredSize(new java.awt.Dimension(500, 20));
-        xFormPanel1.add(xTextField2);
-
-        jScrollPane1.setPreferredSize(new java.awt.Dimension(500, 63));
-
-        xTextArea1.setCaption("Document Description");
-        xTextArea1.setCaptionWidth(120);
-        xTextArea1.setHint("Detailed description of the document");
-        xTextArea1.setName("entity.description"); // NOI18N
-        jScrollPane1.setViewportView(xTextArea1);
-
-        xFormPanel1.add(jScrollPane1);
-
-        xTextField3.setCaption("DIN");
-        xTextField3.setCaptionWidth(120);
-        xTextField3.setHint("Scan or Enter the Document Identification No.");
-        xTextField3.setName("entity.din"); // NOI18N
-        xTextField3.setPreferredSize(new java.awt.Dimension(300, 20));
-        xTextField3.setRequired(true);
-        xFormPanel1.add(xTextField3);
-
-        xSubFormPanel1.setDepends(new String[] {"entity.documenttype"});
-        xSubFormPanel1.setDynamic(true);
-        xSubFormPanel1.setHandler("detailHandler");
+        entityLookup2.setCaption("Pangalan sa Pangulo sa Pamilya");
+        entityLookup2.setExpression("#{entity.name}");
+        entityLookup2.setName("entity.pangulo"); // NOI18N
+        entityLookup2.setPreferredSize(new java.awt.Dimension(0, 21));
+        entityLookup2.setRequired(true);
+        xFormPanel1.add(entityLookup2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(xSubFormPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(xFormPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 616, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(235, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(xSubFormPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(160, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane jScrollPane1;
+    private com.rameses.entity.components.EntityLookup entityLookup2;
+    private com.rameses.rcp.control.XDateField xDateField2;
     private com.rameses.rcp.control.XFormPanel xFormPanel1;
-    private com.rameses.rcp.control.XLabel xLabel1;
-    private com.rameses.rcp.control.XLookupField xLookupField1;
-    private com.rameses.rcp.control.XSubFormPanel xSubFormPanel1;
-    private com.rameses.rcp.control.XTextArea xTextArea1;
-    private com.rameses.rcp.control.XTextField xTextField1;
-    private com.rameses.rcp.control.XTextField xTextField2;
-    private com.rameses.rcp.control.XTextField xTextField3;
     // End of variables declaration//GEN-END:variables
 }

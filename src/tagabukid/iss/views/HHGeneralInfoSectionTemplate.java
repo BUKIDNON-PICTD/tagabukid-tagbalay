@@ -37,53 +37,45 @@ public class HHGeneralInfoSectionTemplate extends javax.swing.JPanel {
         xFormPanel1 = new com.rameses.rcp.control.XFormPanel();
         xLabel1 = new com.rameses.rcp.control.XLabel();
         xLabel2 = new com.rameses.rcp.control.XLabel();
-        xLabel5 = new com.rameses.rcp.control.XLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         xTextArea1 = new com.rameses.rcp.control.XTextArea();
         xFormPanel2 = new com.rameses.rcp.control.XFormPanel();
         xLabel6 = new com.rameses.rcp.control.XLabel();
         xLabel4 = new com.rameses.rcp.control.XLabel();
         xLabel7 = new com.rameses.rcp.control.XLabel();
-        xLabel3 = new com.rameses.rcp.control.XLabel();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         setLayout(new java.awt.BorderLayout());
 
         com.rameses.rcp.control.border.XTitledBorder xTitledBorder1 = new com.rameses.rcp.control.border.XTitledBorder();
-        xTitledBorder1.setTitle("Document Information");
+        xTitledBorder1.setTitle("Household General Information");
         xHorizontalPanel1.setBorder(xTitledBorder1);
         xHorizontalPanel1.setBorderSeparator(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         xHorizontalPanel1.setPreferredSize(new java.awt.Dimension(1008, 149));
 
-        xFormPanel1.setCaptionWidth(120);
+        xFormPanel1.setCaptionWidth(150);
         xFormPanel1.setName(""); // NOI18N
         xFormPanel1.setPreferredSize(new java.awt.Dimension(500, 100));
 
         xLabel1.setBorder(new com.rameses.rcp.control.border.XLineBorder());
-        xLabel1.setCaption("DIN");
-        xLabel1.setExpression("#{entity.din}");
+        xLabel1.setCaption("HIN");
+        xLabel1.setExpression("#{entity.hin}");
         xLabel1.setOpaque(true);
         xLabel1.setPreferredSize(new java.awt.Dimension(0, 16));
         xFormPanel1.add(xLabel1);
 
         xLabel2.setBorder(new com.rameses.rcp.control.border.XLineBorder());
-        xLabel2.setCaption("Document Title");
-        xLabel2.setExpression("#{entity.title}");
+        xLabel2.setCaption("Pangulo sa Pamilya");
+        xLabel2.setExpression("#{entity.pangulo.name}");
         xLabel2.setOpaque(true);
         xLabel2.setPreferredSize(new java.awt.Dimension(0, 16));
         xFormPanel1.add(xLabel2);
 
-        xLabel5.setBorder(new com.rameses.rcp.control.border.XLineBorder());
-        xLabel5.setCaption("Author");
-        xLabel5.setExpression("#{entity.author}");
-        xLabel5.setPreferredSize(new java.awt.Dimension(0, 18));
-        xFormPanel1.add(xLabel5);
-
         jScrollPane1.setPreferredSize(new java.awt.Dimension(0, 63));
 
         xTextArea1.setEditable(false);
-        xTextArea1.setCaption("Document Description");
-        xTextArea1.setName("entity.description"); // NOI18N
+        xTextArea1.setCaption("Nahimutangan sa Panimalay");
+        xTextArea1.setName("entity.pangulo.address.text"); // NOI18N
         jScrollPane1.setViewportView(xTextArea1);
 
         xFormPanel1.add(jScrollPane1);
@@ -94,7 +86,7 @@ public class HHGeneralInfoSectionTemplate extends javax.swing.JPanel {
         xFormPanel2.setPreferredSize(new java.awt.Dimension(500, 100));
 
         xLabel6.setBorder(new com.rameses.rcp.control.border.XLineBorder());
-        xLabel6.setCaption("Document Type");
+        xLabel6.setCaption("Survey Type");
         xLabel6.setExpression("#{entity.documenttype.name}");
         xLabel6.setOpaque(true);
         xLabel6.setPreferredSize(new java.awt.Dimension(300, 16));
@@ -117,15 +109,6 @@ public class HHGeneralInfoSectionTemplate extends javax.swing.JPanel {
         xLabel7.setPreferredSize(new java.awt.Dimension(300, 16));
         xFormPanel2.add(xLabel7);
 
-        xLabel3.setCaption("");
-        xLabel3.setExpression("#{entity.state}");
-        xLabel3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        xLabel3.setForeground(new java.awt.Color(255, 0, 0));
-        xLabel3.setName(""); // NOI18N
-        xLabel3.setOpaque(true);
-        xLabel3.setPreferredSize(new java.awt.Dimension(300, 40));
-        xFormPanel2.add(xLabel3);
-
         xHorizontalPanel1.add(xFormPanel2);
 
         add(xHorizontalPanel1, java.awt.BorderLayout.PAGE_START);
@@ -139,9 +122,7 @@ public class HHGeneralInfoSectionTemplate extends javax.swing.JPanel {
     private com.rameses.rcp.control.XHorizontalPanel xHorizontalPanel1;
     private com.rameses.rcp.control.XLabel xLabel1;
     private com.rameses.rcp.control.XLabel xLabel2;
-    private com.rameses.rcp.control.XLabel xLabel3;
     private com.rameses.rcp.control.XLabel xLabel4;
-    private com.rameses.rcp.control.XLabel xLabel5;
     private com.rameses.rcp.control.XLabel xLabel6;
     private com.rameses.rcp.control.XLabel xLabel7;
     private com.rameses.rcp.control.XTextArea xTextArea1;
