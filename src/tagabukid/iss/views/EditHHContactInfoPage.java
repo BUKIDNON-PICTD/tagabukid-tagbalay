@@ -48,7 +48,7 @@ public class EditHHContactInfoPage extends javax.swing.JPanel {
         xTextField1.setPreferredSize(new java.awt.Dimension(150, 20));
         xFormPanel1.add(xTextField1);
 
-        xTextField2.setCaption(" Phone No.");
+        xTextField2.setCaption("Phone No.");
         xTextField2.setName("entity.phoneno"); // NOI18N
         xTextField2.setPreferredSize(new java.awt.Dimension(150, 20));
         xFormPanel1.add(xTextField2);

@@ -51,7 +51,7 @@
         </Component>
         <Component class="com.rameses.rcp.control.XTextField" name="xTextField2">
           <Properties>
-            <Property name="caption" type="java.lang.String" value=" Phone No."/>
+            <Property name="caption" type="java.lang.String" value="Phone No."/>
             <Property name="name" type="java.lang.String" value="entity.phoneno" noResource="true"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[150, 20]"/>

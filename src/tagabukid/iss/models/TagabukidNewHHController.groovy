@@ -9,13 +9,15 @@ import tagabukid.utils.*;
         
 public class TagabukidNewHHController extends PageFlowController {
             
-    @Script("TagabukidSubayDocumentInfoUtil")
-    def docinfo
+    //    @Script("TagabukidSubayDocumentInfoUtil")
+    //    def docinfo
+    @Script("TagabukidAddressUtil")
+    def address;
             
-    @Service("TagabukidSubayDocumentService")
+    @Service("TagabukidHHService")
     def service
             
-    @Service("TagabukidSubayTitleVerificationService")
+    @Service("TagabukidHHHeadVerificationService")
     def verifySvc
             
     @Service('PersistenceService')
@@ -26,30 +28,33 @@ public class TagabukidNewHHController extends PageFlowController {
     def searchList;
     def verificationSelectedItem;
     def attachmentSelectedItem;
-    
+    def tag;
+    def handler;
     void init() {
-        entity = service.initNew(entity)
-        loadAttachments()
-        reset();
+        entity = service.initNew()
+        memberListHandler.reload();
+        address.reset();
+       
+        //        loadAttachments()
+        //        reset();
     }
     
-    void initAddressType() {
-        owner.reload(); //so we can reload address
-        if( application.copyOwnerAddress ) {
-            def map = [:];
-            map.putAll( entity.business.owner.address ); 
-            map.objid = null; 
-
-            entity.business.address = map; 
-            address.addressType = entity.business.address.type;
+    def editAddress() {
+        if(!entity.copyAddress) {
+            def h = { o->
+                if (handler) handler(o);
+                entity.household.address = o;
+                binding.refresh();
+            }
+            return Inv.lookupOpener( "address:editor", [handler:h, entity:entity, tag: tag] );
         }
         else {
-            address.addressType = application.addressType;
+            entity.household.address = entity.pangulo.address;
         }
     }
 
     void check() {
-        searchList  = verifySvc.getList(entity.title); 
+        searchList  = verifySvc.getList(entity.pangulo.name); 
         if(searchList) {
             pass = false;
             verificationListModel.reload();
@@ -59,13 +64,13 @@ public class TagabukidNewHHController extends PageFlowController {
         }
     }
     
-    void checkdin() {
-        def dininv = service.verifydin(entity.din); 
-        entity.din = dininv.din
-        entity.dininventoryid = dininv.inv.objid
-        binding.refresh('entity.din');
-        pass = true
-    }
+//    void checkhin() {
+//        def dininv = service.verifydin(entity.hin); 
+//        entity.hin = dininv.hin
+//        entity.dininventoryid = dininv.inv.objid
+//        binding.refresh('entity.hin');
+//        pass = true
+//    }
 
     def verificationListModel = [
         fetchList: { o-> return searchList;}
@@ -90,17 +95,17 @@ public class TagabukidNewHHController extends PageFlowController {
         fetchList : { return entity.attachments },
     ] as BasicListModel
             
-    void loadAttachments(){
-        entity.attachments = [];
-        try{
-            entity.attachments = TagabukidDBImageUtil.getInstance().getImages(entity?.objid);
-        }
-        catch(e){
-            println 'Load Attachment error ============';
-            e.printStackTrace();
-        }
-        attachmentListHandler?.load();
-    }
+    //    void loadAttachments(){
+    //        entity.attachments = [];
+    //        try{
+    //            entity.attachments = TagabukidDBImageUtil.getInstance().getImages(entity?.objid);
+    //        }
+    //        catch(e){
+    //            println 'Load Attachment error ============';
+    //            e.printStackTrace();
+    //        }
+    //        attachmentListHandler?.load();
+    //    }
 
     def addAttachment(){
         return InvokerUtil.lookupOpener('upload:attachment', [
@@ -149,7 +154,7 @@ public class TagabukidNewHHController extends PageFlowController {
             ])
     }
     
-     def memberListHandler = [
+    def memberListHandler = [
         fetchList:{o-> 
             if (!entity) return null; 
             if (!entity.members) entity.members = [];
@@ -174,7 +179,7 @@ public class TagabukidNewHHController extends PageFlowController {
         }
     ] as EditorListModel;
     
-     def getLookupMember() {
+    def getLookupMember() {
         return InvokerUtil.lookupOpener('entity:lookup', ['query.type': 'INDIVIDUAL','allowSelectEntityType' : false]); 
     }             
             
@@ -186,41 +191,41 @@ public class TagabukidNewHHController extends PageFlowController {
         }
     }
     
-    def listHandler = [
-        fetchList : { return entity.child },
-        onRemoveItem : {
-            if (MsgBox.confirm('Delete item?')){                
-                entity.child.remove(it)
-                listHandler?.load();
-                return true;
-            }
-            return false;
-        },
-        onColumnUpdate:{item,colName ->
-            entity.child.each{y ->
-                if (item.din == y.din){
-                    y.message = item.remarks
-                }
-            }
-        }
-    ] as BasicListModel
+    //    def listHandler = [
+    //        fetchList : { return entity.child },
+    //        onRemoveItem : {
+    //            if (MsgBox.confirm('Delete item?')){                
+    //                entity.child.remove(it)
+    //                listHandler?.load();
+    //                return true;
+    //            }
+    //            return false;
+    //        },
+    //        onColumnUpdate:{item,colName ->
+    //            entity.child.each{y ->
+    //                if (item.din == y.din){
+    //                    y.message = item.remarks
+    //                }
+    //            }
+    //        }
+    //    ] as BasicListModel
             
     void updateInfo() {
-        boolean test = false;
-        docinfo.handler = {
-            test = true;
-        }
-        if(entity.documenttype.handler ){
-            Modal.show(docinfo.update());
-            if(!test) throw new BreakException();
-        }
-        //check if info is valid
-        //docinfo.verify();
+        //        boolean test = false;
+        //        docinfo.handler = {
+        //            test = true;
+        //        }
+        //        if(entity.documenttype.handler ){
+        //            Modal.show(docinfo.update());
+        //            if(!test) throw new BreakException();
+        //        }
+        //        //check if info is valid
+        //        //docinfo.verify();
     }
     
     public def addEntity() {
-//        def stype = getEntityType(); 
-//        if ( !stype || stype=='entity' ) stype = 'entityindividual';
+        //        def stype = getEntityType(); 
+        //        if ( !stype || stype=='entity' ) stype = 'entityindividual';
         def stype = 'entityindividual';
         
         def params = [:]; 
@@ -233,7 +238,7 @@ public class TagabukidNewHHController extends PageFlowController {
             opener = Inv.lookupOpener( stype +':create', params );
         } catch(Throwable t) {;}
         if ( !opener )
-            throw new Exception("No sufficient permission to add entity");
+        throw new Exception("No sufficient permission to add entity");
         return opener; 
     } 
 
@@ -246,6 +251,12 @@ public class TagabukidNewHHController extends PageFlowController {
         entity.members.add(o);
         memberListHandler.reload();
         
+    }
+    
+    void remove()  {
+        if( !selectedMember ) return;
+        entity.members.remove(selectedMember);
+        memberListHandler.reload();
     }
     
 }

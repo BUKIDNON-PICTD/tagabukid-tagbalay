@@ -14,16 +14,32 @@
             <transition to="edit-generalinfo"  action="init"/>
         </start>
 
-        <page name="edit-generalinfo" title="HH Information">
+        <page name="edit-generalinfo" title="Household Information">
             <!--<transition to="check-din" caption="Next" name="next" mnemonic="N" immediate="false" />-->
-            <transition to="edit-contact" caption="Next" name="next" mnemonic="N" immediate="false" />
+            <transition to="edit-hhaddress" caption="Next" name="next" mnemonic="N" immediate="false" />
         </page>
-        <page name="edit-contact" title="HH Contact Information">
+        
+        <page name="edit-hhaddress" title="Household Address" >
+            <transition to="edit-generalinfo" caption="Back" mnemonic="B" name="back" />
+            <transition to="check-hhhead" caption="Next" name="next" mnemonic="N" />
+        </page>
+        
+        <process name="check-hhhead" action="check">
+            <transition to="verify-hhheadname" cond="#{pass==false}"/>
+            <transition to="edit-contact" cond="#{pass==true}"/>
+        </process>
+        
+        <page name="verify-hhheadname" title="Verify Head of the Family">
+            <transition to="edit-generalinfo" caption="Back" mnemonic="B"/>
+            <transition to="edit-contact" caption="Next" name="next" mnemonic="N" action="verify"/>
+        </page>
+        
+        <page name="edit-contact" title="Household Contact Information">
             <transition to="edit-generalinfo" caption="Back" mnemonic="B" name="back" />
             <transition to="edit-members" caption="Next" name="next" mnemonic="N" />
         </page>
         
-        <page name="edit-members" title="HH Contact Information">
+        <page name="edit-members" title="Household Members Information">
             <transition to="edit-contact" caption="Back" mnemonic="B" name="back" />
             <transition to="confirm" caption="Next" name="next" mnemonic="N" />
         </page>
@@ -48,7 +64,7 @@
         </page>-->
 
         <page name="confirm" title="Confirm New HH">
-            <transition to="edit-attachments" caption="Back" mnemonic="B" name="back"/>
+            <transition to="edit-members" caption="Back" mnemonic="B" name="back"/>
             <transition to="save-success" caption="Submit" mnemonic="S" name="save" action="save" confirm="You are about to save this transaction. Continue?"/>
         </page>
         
@@ -61,6 +77,7 @@
     
     <pages>
         <page name="edit-generalinfo" template="tagabukid.iss.views.EditHHGeneralInfoPage"/>
+        <page name="edit-hhaddress" template="tagabukid.iss.views.EditHHAddressPage"/>
         <page name="edit-members" template="tagabukid.iss.views.EditHHMemberInfoPage"/>
         <page name="edit-contact" template="tagabukid.iss.views.EditHHContactInfoPage"/>
 <!--        <page name="verify-documentname" template="tagabukid.iss.views.EditHHHeadVerificationPage"/>        

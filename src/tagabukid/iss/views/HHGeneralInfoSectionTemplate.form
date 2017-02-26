@@ -96,7 +96,7 @@
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="caption" type="java.lang.String" value="Nahimutangan sa Panimalay"/>
-                    <Property name="name" type="java.lang.String" value="entity.pangulo.address.text" noResource="true"/>
+                    <Property name="name" type="java.lang.String" value="entity.household.address.text" noResource="true"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -105,7 +105,7 @@
         </Container>
         <Container class="com.rameses.rcp.control.XFormPanel" name="xFormPanel2">
           <Properties>
-            <Property name="captionWidth" type="int" value="120"/>
+            <Property name="captionWidth" type="int" value="130"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[500, 100]"/>
             </Property>
@@ -116,8 +116,8 @@
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                     <PropertyBean type="com.rameses.rcp.control.border.XLineBorder"/>
                 </Property>
-                <Property name="caption" type="java.lang.String" value="Survey Type"/>
-                <Property name="expression" type="java.lang.String" value="#{entity.documenttype.name}"/>
+                <Property name="caption" type="java.lang.String" value="Klase sa survey"/>
+                <Property name="expression" type="java.lang.String" value="#{entity.surveytype}"/>
                 <Property name="opaque" type="boolean" value="true"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[300, 16]"/>
@@ -129,8 +129,8 @@
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                     <PropertyBean type="com.rameses.rcp.control.border.XLineBorder"/>
                 </Property>
-                <Property name="caption" type="java.lang.String" value="Date Created"/>
-                <Property name="expression" type="java.lang.String" value="#{entity.recordlog.datecreated}"/>
+                <Property name="caption" type="java.lang.String" value="Petsa sa Pagpangutana"/>
+                <Property name="expression" type="java.lang.String" value="#{entity.dtfiled}"/>
                 <Property name="for" type="java.lang.String" value=""/>
                 <Property name="opaque" type="boolean" value="true"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -143,7 +143,22 @@
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                     <PropertyBean type="com.rameses.rcp.control.border.XLineBorder"/>
                 </Property>
-                <Property name="caption" type="java.lang.String" value="Created By"/>
+                <Property name="caption" type="java.lang.String" value="Petsa sa Pag-encode"/>
+                <Property name="expression" type="java.lang.String" value="#{entity.recordlog.createdbyuser}"/>
+                <Property name="for" type="java.lang.String" value=""/>
+                <Property name="name" type="java.lang.String" value="" noResource="true"/>
+                <Property name="opaque" type="boolean" value="true"/>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[300, 16]"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="com.rameses.rcp.control.XLabel" name="xLabel8">
+              <Properties>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                    <PropertyBean type="com.rameses.rcp.control.border.XLineBorder"/>
+                </Property>
+                <Property name="caption" type="java.lang.String" value="Gi-encode ni"/>
                 <Property name="expression" type="java.lang.String" value="#{entity.recordlog.createdbyuser}"/>
                 <Property name="for" type="java.lang.String" value=""/>
                 <Property name="name" type="java.lang.String" value="" noResource="true"/>

@@ -56,7 +56,6 @@ public class EditHHMemberInfoPage extends javax.swing.JPanel {
             })
         });
         xDataTable1.setHandler("memberListHandler");
-        xDataTable1.setId("memberListHandler");
         xDataTable1.setName("selectedMember"); // NOI18N
 
         xButton2.setName("addEntity"); // NOI18N

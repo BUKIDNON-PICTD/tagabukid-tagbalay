@@ -35,12 +35,13 @@ public class EditHHGeneralInfoPage extends javax.swing.JPanel {
         xFormPanel1 = new com.rameses.rcp.control.XFormPanel();
         xDateField2 = new com.rameses.rcp.control.XDateField();
         entityLookup2 = new com.rameses.entity.components.EntityLookup();
+        xCheckBox1 = new com.rameses.rcp.control.XCheckBox();
 
         xFormPanel1.setCaptionPadding(new java.awt.Insets(0, 5, 0, 5));
         xFormPanel1.setCaptionWidth(180);
 
         xDateField2.setCaption("Petsa sa Pagpangutana");
-        xDateField2.setName("entity.dtfiled"); // NOI18N
+        xDateField2.setName("entity.surveydate"); // NOI18N
         xDateField2.setRequired(true);
         xFormPanel1.add(xDateField2);
 
@@ -51,6 +52,11 @@ public class EditHHGeneralInfoPage extends javax.swing.JPanel {
         entityLookup2.setRequired(true);
         xFormPanel1.add(entityLookup2);
 
+        xCheckBox1.setCaption("");
+        xCheckBox1.setName("entity.copyAddress"); // NOI18N
+        xCheckBox1.setText("Pariha ang nahimutangan sa panimalay sa gi puyoan sa pangulo sa panimalay");
+        xFormPanel1.add(xCheckBox1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -58,20 +64,21 @@ public class EditHHGeneralInfoPage extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 616, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(235, Short.MAX_VALUE))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(160, Short.MAX_VALUE))
+                .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(537, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.rameses.entity.components.EntityLookup entityLookup2;
+    private com.rameses.rcp.control.XCheckBox xCheckBox1;
     private com.rameses.rcp.control.XDateField xDateField2;
     private com.rameses.rcp.control.XFormPanel xFormPanel1;
     // End of variables declaration//GEN-END:variables

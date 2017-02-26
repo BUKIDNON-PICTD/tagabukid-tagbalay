@@ -43,6 +43,7 @@ public class HHGeneralInfoSectionTemplate extends javax.swing.JPanel {
         xLabel6 = new com.rameses.rcp.control.XLabel();
         xLabel4 = new com.rameses.rcp.control.XLabel();
         xLabel7 = new com.rameses.rcp.control.XLabel();
+        xLabel8 = new com.rameses.rcp.control.XLabel();
 
         setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         setLayout(new java.awt.BorderLayout());
@@ -75,39 +76,48 @@ public class HHGeneralInfoSectionTemplate extends javax.swing.JPanel {
 
         xTextArea1.setEditable(false);
         xTextArea1.setCaption("Nahimutangan sa Panimalay");
-        xTextArea1.setName("entity.pangulo.address.text"); // NOI18N
+        xTextArea1.setName("entity.household.address.text"); // NOI18N
         jScrollPane1.setViewportView(xTextArea1);
 
         xFormPanel1.add(jScrollPane1);
 
         xHorizontalPanel1.add(xFormPanel1);
 
-        xFormPanel2.setCaptionWidth(120);
+        xFormPanel2.setCaptionWidth(130);
         xFormPanel2.setPreferredSize(new java.awt.Dimension(500, 100));
 
         xLabel6.setBorder(new com.rameses.rcp.control.border.XLineBorder());
-        xLabel6.setCaption("Survey Type");
-        xLabel6.setExpression("#{entity.documenttype.name}");
+        xLabel6.setCaption("Klase sa survey");
+        xLabel6.setExpression("#{entity.surveytype}");
         xLabel6.setOpaque(true);
         xLabel6.setPreferredSize(new java.awt.Dimension(300, 16));
         xFormPanel2.add(xLabel6);
 
         xLabel4.setBorder(new com.rameses.rcp.control.border.XLineBorder());
-        xLabel4.setCaption("Date Created");
-        xLabel4.setExpression("#{entity.recordlog.datecreated}");
+        xLabel4.setCaption("Petsa sa Pagpangutana");
+        xLabel4.setExpression("#{entity.dtfiled}");
         xLabel4.setFor("");
         xLabel4.setOpaque(true);
         xLabel4.setPreferredSize(new java.awt.Dimension(300, 16));
         xFormPanel2.add(xLabel4);
 
         xLabel7.setBorder(new com.rameses.rcp.control.border.XLineBorder());
-        xLabel7.setCaption("Created By");
+        xLabel7.setCaption("Petsa sa Pag-encode");
         xLabel7.setExpression("#{entity.recordlog.createdbyuser}");
         xLabel7.setFor("");
         xLabel7.setName(""); // NOI18N
         xLabel7.setOpaque(true);
         xLabel7.setPreferredSize(new java.awt.Dimension(300, 16));
         xFormPanel2.add(xLabel7);
+
+        xLabel8.setBorder(new com.rameses.rcp.control.border.XLineBorder());
+        xLabel8.setCaption("Gi-encode ni");
+        xLabel8.setExpression("#{entity.recordlog.createdbyuser}");
+        xLabel8.setFor("");
+        xLabel8.setName(""); // NOI18N
+        xLabel8.setOpaque(true);
+        xLabel8.setPreferredSize(new java.awt.Dimension(300, 16));
+        xFormPanel2.add(xLabel8);
 
         xHorizontalPanel1.add(xFormPanel2);
 
@@ -125,6 +135,7 @@ public class HHGeneralInfoSectionTemplate extends javax.swing.JPanel {
     private com.rameses.rcp.control.XLabel xLabel4;
     private com.rameses.rcp.control.XLabel xLabel6;
     private com.rameses.rcp.control.XLabel xLabel7;
+    private com.rameses.rcp.control.XLabel xLabel8;
     private com.rameses.rcp.control.XTextArea xTextArea1;
     // End of variables declaration//GEN-END:variables
 }
