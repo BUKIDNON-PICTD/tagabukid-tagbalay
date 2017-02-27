@@ -1,0 +1,62 @@
+<!--<workunit extends="com/rameses/seti2/templates/CrudList.xml" schemaName="subayhousehold_variable">
+    <invokers>
+        <invoker folderid="/explorer/master/subaymaster" caption="Household Variables" action="init" target="window" index="2" role="MASTER"/>
+        <invoker folderid="/home/dts/master" caption="Household Variables" action="init" target="window" index="2" role="MASTER"/>
+    </invokers>
+</workunit>-->
+
+<workunit>
+    <invokers>
+        <invoker type="household_variable:open" action="open" caption="Household Variable"/>
+        <invoker type="household_variable:create" action="init" caption="Household Variable" 
+                role="MASTER" permission="household_variable.create"/>
+    </invokers>
+    <code>
+    <![CDATA[
+        import com.rameses.rcp.common.*;
+        import com.rameses.rcp.annotations.*;
+        import com.rameses.osiris2.common.*;
+
+        class HouseholdVariableController extends CRUDController {
+
+            String serviceName = 'TagabukidHouseholdVariableService'
+            String entityName = 'household_variable'
+            String prefixId = 'HV'
+            def arrayvalue
+            def datatypes = LOV.VAR_DATA_TYPES
+            def vartype = 'USER-DEFINED';
+
+            @PropertyChangeListener
+            def listener = [
+                "entity.datatype": {o->
+                    entity.arrayvalues = []
+                    binding.refresh('arrayvalue')
+                }
+            ]
+
+            Map createEntity() {
+                return [ system:0, arrayvalues:[] ]
+            }
+
+            void addArrayValue() {
+                def value = MsgBox.prompt("Enter value: ")
+                if( !value || value == 'null' ) return
+                if( !entity.arrayvalues.find{ it == value } ) {
+                    entity.arrayvalues.add(value.toUpperCase())
+                    binding.refresh('arrayvalue')
+                }
+            }
+
+            void removeArrayValue() {
+                if( MsgBox.confirm("Remove selected array value?") ) {
+                    entity.arrayvalues.remove(arrayvalue)
+                    binding.refresh('arrayvalue')
+                }
+            }
+        }
+    ]]>
+    </code>
+    <pages>
+        <page template="com.rameses.gov.etracs.bpls.BusinessVariablePage"/>
+    </pages>
+</workunit>

@@ -15,7 +15,7 @@ public class TagabukidAddressUtil {
     def type;
     
     def getAddress() {
-        return caller.entity.household.address;
+        return caller.entity.household_.address;
     }
 
     def getHandler() {
@@ -25,7 +25,7 @@ public class TagabukidAddressUtil {
 
     void verify() {
         if( !address?.type)
-            throw new Exception("Error in household address type-empty. Please check 'type' in household address");
+            throw new Exception("Error in household_ address type-empty. Please check 'type' in household_ address");
         address.text = TemplateProvider.instance.getResult("templates/address/" + address.type + ".htm", [entity: address] );
         if(address.text) {
             address.text = address.text.trim();
@@ -34,8 +34,8 @@ public class TagabukidAddressUtil {
         else {
             throw new Exception("Please specify an address");
         }
-        caller.entity.household.address = address;
-        caller.entity.household.address.completed = true;
+        caller.entity.household_.address = address;
+        caller.entity.household_.address.completed = true;
     }
 
     void reset() {
@@ -54,13 +54,13 @@ public class TagabukidAddressUtil {
     }
 
    def edit() {
-        if(!caller.entity.household.address) caller.entity.household.address = [:];
+        if(!caller.entity.household_.address) caller.entity.household_.address = [:];
         def m = { o->
-            caller.entity.household.address = o; 
-            caller.binding.refresh('entity.household.address.text');    
+            caller.entity.household_.address = o; 
+            caller.binding.refresh('entity.household_.address.text');    
         }
         return Inv.lookupOpener( "address:editor", [
-            handler: m, entity: caller.entity.household.address, tag:'BUSINESS' 
+            handler: m, entity: caller.entity.household_.address, tag:'BUSINESS' 
         ]);
     }
 

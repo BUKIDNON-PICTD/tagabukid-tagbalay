@@ -7,17 +7,15 @@ import com.rameses.gov.etracs.bpls.controller.*;
 import com.rameses.util.*;
 import tagabukid.utils.*;
         
-public class TagabukidNewHHController extends PageFlowController {
+public class TagabukidNewHouseholdController extends PageFlowController {
             
-    //    @Script("TagabukidSubayDocumentInfoUtil")
-    //    def docinfo
-    @Script("TagabukidAddressUtil")
-    def address;
-            
-    @Service("TagabukidHHService")
+    @Script("TagabukidSubayDocumentInfoUtil")
+    def docinfo
+    
+    @Service("TagabukidHouseholdService")
     def service
             
-    @Service("TagabukidHHHeadVerificationService")
+    @Service("TagabukidHouseholdHeadVerificationService")
     def verifySvc
             
     @Service('PersistenceService')
@@ -33,24 +31,43 @@ public class TagabukidNewHHController extends PageFlowController {
     void init() {
         entity = service.initNew()
         memberListHandler.reload();
-        address.reset();
+        addressreset();
        
         //        loadAttachments()
         //        reset();
     }
-    
+    void addressreset() {
+       entity.household_.address = null;
+       entity.text = null;
+    }
     def editAddress() {
-        if(!entity.copyAddress) {
-            def h = { o->
-                if (handler) handler(o);
-                entity.household.address = o;
-                binding.refresh();
-            }
-            return Inv.lookupOpener( "address:editor", [handler:h, entity:entity, tag: tag] );
+        def h = { o->
+            if (handler) handler(o);
+            entity.household_.address = o;
+            binding.refresh();
         }
+        return Inv.lookupOpener( "address:editor", [handler:h, entity:entity, tag: tag] );
+    }
+    
+    def initHouseholdAddress(){
+        if(entity.copyAddress){
+            entity.household_.address = entity.pangulo.address;
+        }
+    }
+    
+      void verifyaddress() {
+        if( !entity.household_.address?.type)
+            throw new Exception("Error in household_ address type-empty. Please check 'type' in household_ address");
+        entity.household_.address.text = TemplateProvider.instance.getResult("templates/address/" + entity.household_.address.type + ".htm", [entity: entity.household_.address] );
+        if(entity.household_.address.text) {
+            entity.household_.address.text = entity.household_.address.text.trim();
+            entity.household_.address.text = entity.household_.address.text.replace(",\n", "\n");
+        }   
         else {
-            entity.household.address = entity.pangulo.address;
+            throw new Exception("Please specify an address");
         }
+        entity.household_.address = entity.household_.address;
+        entity.household_.address.completed = true;
     }
 
     void check() {
@@ -210,19 +227,38 @@ public class TagabukidNewHHController extends PageFlowController {
     //        }
     //    ] as BasicListModel
             
-    void updateInfo() {
-        //        boolean test = false;
-        //        docinfo.handler = {
-        //            test = true;
-        //        }
-        //        if(entity.documenttype.handler ){
-        //            Modal.show(docinfo.update());
-        //            if(!test) throw new BreakException();
-        //        }
-        //        //check if info is valid
-        //        //docinfo.verify();
+//    void updateInfo() {
+//                boolean test = false;
+//                docinfo.handler = {
+//                    test = true;
+//                }
+//                if(entity.documenttype.handler ){
+//                    Modal.show(docinfo.update());
+//                    if(!test) throw new BreakException();
+//                }
+//                //check if info is valid
+//                //docinfo.verify();
+//    }
+    
+     void updateInfo() {
+        //if requierd na may at least 1 member ang household
+        //membersverify();
+        boolean test = false;
+        householdinfo.handler = {
+            test = true;
+        }
+        Modal.show(householdinfo.update());
+        if(!test) throw new BreakException();
+        householdinfo.verify();
     }
     
+//     def membersverify() {
+//        if(!entity.members) 
+//            throw new Exception("Please specify at least one member of household");
+//        if(items.find{!it.lobid})
+//            throw new Exception("All lines of business must be specified. lobid is null");
+//    }
+            
     public def addEntity() {
         //        def stype = getEntityType(); 
         //        if ( !stype || stype=='entity' ) stype = 'entityindividual';

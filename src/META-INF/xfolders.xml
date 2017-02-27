@@ -12,7 +12,7 @@
     </folder> 
     <folder id="home">
         <folder id="iss" caption="Integrated Survey System">
-            <folder id="hh" caption="Household" index="4"/>
+            <folder id="household_" caption="Household" index="4"/>
             <folder id="master" caption="Master File" index="5"/>
         </folder>
     </folder>

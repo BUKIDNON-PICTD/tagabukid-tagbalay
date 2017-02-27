@@ -6,20 +6,17 @@
 package tagabukid.iss.views;
 
 
-import com.rameses.osiris2.themes.FormPage;
-import com.rameses.rcp.ui.annotations.Template;
 
 /**
  *
  * @author rufino
  */
-@Template({FormPage.class})
-public class EditHHHeadVerificationPage extends javax.swing.JPanel {
+public class EditHouseholdChildPage extends javax.swing.JPanel {
 
     /**
-     * Creates new form DocumentTitleVerificationPage
+     * Creates new form DocumentChildPage
      */
-    public EditHHHeadVerificationPage() {
+    public EditHouseholdChildPage() {
         initComponents();
     }
 
@@ -32,29 +29,31 @@ public class EditHHHeadVerificationPage extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        xFormPanel1 = new com.rameses.rcp.control.XFormPanel();
-        xLabel1 = new com.rameses.rcp.control.XLabel();
-        xLabel2 = new com.rameses.rcp.control.XLabel();
-        jLabel1 = new javax.swing.JLabel();
+        xActionTextField2 = new com.rameses.rcp.control.XActionTextField();
         xDataTable1 = new com.rameses.rcp.control.XDataTable();
+        xFormPanel2 = new com.rameses.rcp.control.XFormPanel();
+        xLabel3 = new com.rameses.rcp.control.XLabel();
 
-        xFormPanel1.setCaptionWidth(100);
-
-        xLabel1.setBorder(new com.rameses.rcp.control.border.XLineBorder());
-        xLabel1.setCaption("Document Title");
-        xLabel1.setExpression("#{entity.title}");
-        xLabel1.setPreferredSize(new java.awt.Dimension(500, 16));
-        xFormPanel1.add(xLabel1);
-
-        xLabel2.setBorder(new com.rameses.rcp.control.border.XLineBorder());
-        xLabel2.setCaption("Document Author");
-        xLabel2.setExpression("#{entity.author}");
-        xLabel2.setPreferredSize(new java.awt.Dimension(500, 16));
-        xFormPanel1.add(xLabel2);
-
-        jLabel1.setText("The system has detected similar title that already exist in the database. If there is a positive match, please report this to the DTS administrator otherwise ignore and click Next.");
+        xActionTextField2.setActionCommand("barcodesearch");
+        xActionTextField2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        xActionTextField2.setHint("Search DIN");
+        xActionTextField2.setName("din"); // NOI18N
+        xActionTextField2.setVisibleWhen("");
 
         xDataTable1.setColumns(new com.rameses.rcp.common.Column[]{
+            new com.rameses.rcp.common.Column(new Object[]{
+                new Object[]{"name", "din"}
+                , new Object[]{"caption", "DIN"}
+                , new Object[]{"width", 100}
+                , new Object[]{"minWidth", 0}
+                , new Object[]{"maxWidth", 0}
+                , new Object[]{"required", false}
+                , new Object[]{"resizable", true}
+                , new Object[]{"nullWhenEmpty", true}
+                , new Object[]{"editable", false}
+                , new Object[]{"textCase", com.rameses.rcp.constant.TextCase.NONE}
+                , new Object[]{"typeHandler", new com.rameses.rcp.common.TextColumnHandler()}
+            }),
             new com.rameses.rcp.common.Column(new Object[]{
                 new Object[]{"name", "title"}
                 , new Object[]{"caption", "Title"}
@@ -69,33 +68,7 @@ public class EditHHHeadVerificationPage extends javax.swing.JPanel {
                 , new Object[]{"typeHandler", new com.rameses.rcp.common.TextColumnHandler()}
             }),
             new com.rameses.rcp.common.Column(new Object[]{
-                new Object[]{"name", "author"}
-                , new Object[]{"caption", "Author"}
-                , new Object[]{"width", 100}
-                , new Object[]{"minWidth", 0}
-                , new Object[]{"maxWidth", 0}
-                , new Object[]{"required", false}
-                , new Object[]{"resizable", true}
-                , new Object[]{"nullWhenEmpty", true}
-                , new Object[]{"editable", false}
-                , new Object[]{"textCase", com.rameses.rcp.constant.TextCase.NONE}
-                , new Object[]{"typeHandler", new com.rameses.rcp.common.TextColumnHandler()}
-            }),
-            new com.rameses.rcp.common.Column(new Object[]{
-                new Object[]{"name", "description"}
-                , new Object[]{"caption", "Description"}
-                , new Object[]{"width", 100}
-                , new Object[]{"minWidth", 0}
-                , new Object[]{"maxWidth", 0}
-                , new Object[]{"required", false}
-                , new Object[]{"resizable", true}
-                , new Object[]{"nullWhenEmpty", true}
-                , new Object[]{"editable", false}
-                , new Object[]{"textCase", com.rameses.rcp.constant.TextCase.NONE}
-                , new Object[]{"typeHandler", new com.rameses.rcp.common.TextColumnHandler()}
-            }),
-            new com.rameses.rcp.common.Column(new Object[]{
-                new Object[]{"name", "datecreated"}
+                new Object[]{"name", "recordlog.datecreated"}
                 , new Object[]{"caption", "Date Created"}
                 , new Object[]{"width", 100}
                 , new Object[]{"minWidth", 0}
@@ -108,7 +81,7 @@ public class EditHHHeadVerificationPage extends javax.swing.JPanel {
                 , new Object[]{"typeHandler", new com.rameses.rcp.common.TextColumnHandler()}
             }),
             new com.rameses.rcp.common.Column(new Object[]{
-                new Object[]{"name", "createdby"}
+                new Object[]{"name", "recordlog.createdbyuser"}
                 , new Object[]{"caption", "Created By"}
                 , new Object[]{"width", 100}
                 , new Object[]{"minWidth", 0}
@@ -121,8 +94,36 @@ public class EditHHHeadVerificationPage extends javax.swing.JPanel {
                 , new Object[]{"typeHandler", new com.rameses.rcp.common.TextColumnHandler()}
             }),
             new com.rameses.rcp.common.Column(new Object[]{
-                new Object[]{"name", "weight"}
-                , new Object[]{"caption", "% Match"}
+                new Object[]{"name", "remarks"}
+                , new Object[]{"caption", "Remarks"}
+                , new Object[]{"width", 100}
+                , new Object[]{"minWidth", 0}
+                , new Object[]{"maxWidth", 0}
+                , new Object[]{"required", false}
+                , new Object[]{"resizable", true}
+                , new Object[]{"nullWhenEmpty", true}
+                , new Object[]{"editable", true}
+                , new Object[]{"editableWhen", "#{item.din != null}"}
+                , new Object[]{"textCase", com.rameses.rcp.constant.TextCase.UPPER}
+                , new Object[]{"typeHandler", new com.rameses.rcp.common.TextColumnHandler()}
+            }),
+            new com.rameses.rcp.common.Column(new Object[]{
+                new Object[]{"name", "linked"}
+                , new Object[]{"caption", "Link Only"}
+                , new Object[]{"width", 100}
+                , new Object[]{"minWidth", 0}
+                , new Object[]{"maxWidth", 0}
+                , new Object[]{"required", false}
+                , new Object[]{"resizable", true}
+                , new Object[]{"nullWhenEmpty", true}
+                , new Object[]{"editable", true}
+                , new Object[]{"editableWhen", "#{allowlink[item]}"}
+                , new Object[]{"textCase", com.rameses.rcp.constant.TextCase.NONE}
+                , new Object[]{"typeHandler", new com.rameses.rcp.common.CheckBoxColumnHandler(java.lang.Boolean.class, true, false)}
+            }),
+            new com.rameses.rcp.common.Column(new Object[]{
+                new Object[]{"name", "state"}
+                , new Object[]{"caption", "State"}
                 , new Object[]{"width", 100}
                 , new Object[]{"minWidth", 0}
                 , new Object[]{"maxWidth", 0}
@@ -134,8 +135,23 @@ public class EditHHHeadVerificationPage extends javax.swing.JPanel {
                 , new Object[]{"typeHandler", new com.rameses.rcp.common.TextColumnHandler()}
             })
         });
-        xDataTable1.setHandler("verificationListModel");
-        xDataTable1.setName("verificationSelectedItem"); // NOI18N
+        xDataTable1.setHandler("listHandler");
+        xDataTable1.setName("selectedItem"); // NOI18N
+
+        xFormPanel2.setCaptionBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        xFormPanel2.setCaptionFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+
+        xLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        xLabel3.setCaption("Document Count");
+        xLabel3.setCaptionWidth(200);
+        xLabel3.setDepends(new String[] {"din"});
+        xLabel3.setExpression("#{entity.child.size}");
+        xLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        xLabel3.setForeground(new java.awt.Color(255, 0, 0));
+        xLabel3.setName("documentcount"); // NOI18N
+        xLabel3.setOpaque(true);
+        xLabel3.setPreferredSize(new java.awt.Dimension(100, 23));
+        xFormPanel2.add(xLabel3);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -144,30 +160,38 @@ public class EditHHHeadVerificationPage extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(xFormPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 852, Short.MAX_VALUE)
-                    .addComponent(xDataTable1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(xDataTable1, javax.swing.GroupLayout.DEFAULT_SIZE, 997, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(xFormPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(xActionTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(546, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(xDataTable1, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
-                .addGap(30, 30, 30))
+                .addGap(19, 19, 19)
+                .addComponent(xFormPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(xDataTable1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(xActionTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(293, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private com.rameses.rcp.control.XActionTextField xActionTextField2;
     private com.rameses.rcp.control.XDataTable xDataTable1;
-    private com.rameses.rcp.control.XFormPanel xFormPanel1;
-    private com.rameses.rcp.control.XLabel xLabel1;
-    private com.rameses.rcp.control.XLabel xLabel2;
+    private com.rameses.rcp.control.XFormPanel xFormPanel2;
+    private com.rameses.rcp.control.XLabel xLabel3;
     // End of variables declaration//GEN-END:variables
 }

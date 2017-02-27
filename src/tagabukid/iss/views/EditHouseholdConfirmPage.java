@@ -12,13 +12,13 @@ import com.rameses.rcp.ui.annotations.Template;
  *
  * @author rufino
  */
-@Template({HHGeneralInfoSectionTemplate.class})
-public class EditHHConfirmPage extends javax.swing.JPanel {
+@Template({HouseholdGeneralInfoSectionTemplate.class})
+public class EditHouseholdConfirmPage extends javax.swing.JPanel {
 
     /**
      * Creates new form ConfirmPage
      */
-    public EditHHConfirmPage() {
+    public EditHouseholdConfirmPage() {
         initComponents();
     }
 

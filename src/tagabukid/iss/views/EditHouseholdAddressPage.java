@@ -13,14 +13,14 @@ import com.rameses.rcp.ui.annotations.Template;
  *
  * @author rufino
  */
-@Template({HHGeneralInfoSectionTemplate.class})
+@Template({HouseholdGeneralInfoSectionTemplate.class})
 @StyleSheet
-public class EditHHAddressPage extends javax.swing.JPanel {
+public class EditHouseholdAddressPage extends javax.swing.JPanel {
 
     /**
      * Creates new form EditDocumentAttachmentPage
      */
-    public EditHHAddressPage() {
+    public EditHouseholdAddressPage() {
         initComponents();
     }
 
@@ -36,7 +36,7 @@ public class EditHHAddressPage extends javax.swing.JPanel {
         addressComponent1 = new com.rameses.enterprise.views.AddressComponent();
 
         addressComponent1.setBorder(javax.swing.BorderFactory.createTitledBorder("Nahimutangan sa Panimalay"));
-        addressComponent1.setName("entity.household.address"); // NOI18N
+        addressComponent1.setName("entity.household_.address"); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

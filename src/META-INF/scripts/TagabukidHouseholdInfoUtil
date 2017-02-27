@@ -5,7 +5,7 @@ import com.rameses.osiris2.common.*
 import java.rmi.server.*;
 import com.rameses.util.*;
 
-public class TagabukidSubayDocumentInfoUtil {
+public class TagabukidHouseholdInfoUtil {
      
     @Caller
     def caller;
@@ -18,18 +18,18 @@ public class TagabukidSubayDocumentInfoUtil {
 
     def listModel = [
        fetchList: { o-> 
-            return entity.docinfos; 
+            return entity.household_infos; 
         }
     ] as BasicListModel;
 
     def update() {
         def e = [:];
         e.putAll( entity );
-        return InvokerUtil.lookupOpener( entity.documenttype.handler + ":docinfo", [
+        return InvokerUtil.lookupOpener("iss:household_info", [
             entity: e,
             handler:{ result ->
                
-                entity.docinfos = result.infos;
+                entity.household_infos = result.infos;
                 listModel.reload();
                 if(handler) handler();
             }
