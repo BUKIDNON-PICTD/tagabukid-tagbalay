@@ -192,7 +192,7 @@ public class TagabukidNewHouseholdController extends PageFlowController {
                 if (entity.pangulo.objid ==  item.member.objid) throw new Exception('Dili pwede pilion ang PANGULO sa pamilya'); 
             }
             if (colname == 'relation') {
-                if (item.realtion == 'PANGULO') throw new Exception('Dili pwede nga duha ang PANGULO sa pamilya.'); 
+                if (item.relation == 'PANGULO') throw new Exception('Dili pwede nga duha ang PANGULO sa pamilya.'); 
             }
         },
         onAddItem: {item-> 
@@ -253,7 +253,6 @@ public class TagabukidNewHouseholdController extends PageFlowController {
     //    }
     
     void updateInfo() {
-       
         addpangulotomember();
         //if requierd na may at least 1 member ang household
         //membersverify();

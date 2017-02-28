@@ -127,7 +127,6 @@ public abstract class HouseholdInfoEdit extends PageFlowController {
      public void loadInfos() {
         infos.clear();
         def result = execute();
-        println result.infos;
         title = result.title;
         //phase 0 is the looping phase.  
         if( result.phase > 1 ) {
