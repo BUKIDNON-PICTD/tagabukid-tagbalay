@@ -18,25 +18,38 @@ public class TagabukidHouseholdInfoUtil {
 
     def listModel = [
        fetchList: { o-> 
-            return entity.household_infos; 
+            return entity.householdinfos; 
         }
     ] as BasicListModel;
 
     def update() {
         def e = [:];
         e.putAll( entity );
-        return InvokerUtil.lookupOpener("iss:household_info", [
+        if( !entity.householdinfos ) entity.householdinfos = [];
+        return InvokerUtil.lookupOpener("iss:householdinfos", [
             entity: e,
+            existingInfos: entity.householdinfos,
             handler:{ result ->
-               
-                entity.household_infos = result.infos;
+                entity.householdinfos = result.infos;
                 listModel.reload();
                 if(handler) handler();
             }
         ]);
       
     }
-
+    
+    def verify() {
+        if(!entity.householdinfos) 
+            throw new Exception("Please specify at least one info for household");
+        def unedited = entity.householdinfos.findAll{ it.value == null };
+        if( unedited ) {
+            def buff = new StringBuffer();
+            unedited.each {
+                buff.append( "\n"+it.attribute.name );
+            }
+            throw new Exception("Please complete the ff. Do not leave blanks" + buff.toString() );  
+        }    
+    }
 
     void reset(){
         listModel.reload();

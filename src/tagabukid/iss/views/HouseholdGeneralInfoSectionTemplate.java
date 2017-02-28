@@ -76,7 +76,7 @@ public class HouseholdGeneralInfoSectionTemplate extends javax.swing.JPanel {
 
         xTextArea1.setEditable(false);
         xTextArea1.setCaption("Nahimutangan sa Panimalay");
-        xTextArea1.setName("entity.household_.address.text"); // NOI18N
+        xTextArea1.setName("entity.household.address.text"); // NOI18N
         jScrollPane1.setViewportView(xTextArea1);
 
         xFormPanel1.add(jScrollPane1);

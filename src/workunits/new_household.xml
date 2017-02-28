@@ -37,12 +37,12 @@
         
         <page name="edit-contact" title="Household Contact Information">
             <transition to="edit-householdaddress" caption="Back" mnemonic="B" name="back" />
-            <transition to="edit-members" caption="Next" name="next" mnemonic="N" action="updateInfo" />
+            <transition to="edit-members" caption="Next" name="next" mnemonic="N"/>
         </page>
         
         <page name="edit-members" title="Household Members Information">
             <transition to="edit-contact" caption="Back" mnemonic="B" name="back" />
-            <transition to="confirm" caption="Next" name="next" mnemonic="N" />
+            <transition to="confirm" caption="Next" name="next" mnemonic="N" action="updateInfo" />
         </page>
 <!--        <process name="check-din" action="checkdin">
             <transition to="edit-generalinfo" cond="#{pass==false}"/>

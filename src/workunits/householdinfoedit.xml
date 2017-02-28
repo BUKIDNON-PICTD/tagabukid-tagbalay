@@ -1,7 +1,7 @@
 <workunit>
     
     <invokers>
-        <invoker type="iss:householdinfo" caption="Edit Household Info" action="start" target="popup"/>
+        <invoker type="iss:householdinfos" caption="Edit Household Info" action="start" target="popup"/>
     </invokers>
     
     <code>
@@ -14,11 +14,12 @@
         
         public class HouseholdInfoEditController extends tagabukid.iss.models.HouseholdInfoEdit{
 
-            @Service("TagabukidHouseholdRuleService")
+            @Service("TagabukidHouseholdInfoRuleService")
             def service;
             
-            String title = "Edit Household Info";
-         
+            @FormTitle
+            def title;
+            
             public def execute() {
                 return service.execute(query);
             }
@@ -47,7 +48,7 @@
     </pageflow>
     
     <pages>
-        <page name="specify-info" template="tagabukid.subay.views.DefaultDocumentInfoEditPage"/>
+        <page name="specify-info" template="tagabukid.iss.views.HouseholdInfoEditPage"/>
     </pages>
     
 </workunit>

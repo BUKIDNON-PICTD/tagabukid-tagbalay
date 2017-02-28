@@ -9,8 +9,8 @@ import tagabukid.utils.*;
         
 public class TagabukidNewHouseholdController extends PageFlowController {
             
-    @Script("TagabukidSubayDocumentInfoUtil")
-    def docinfo
+    @Script("TagabukidHouseholdInfoUtil")
+    def householdinfo
     
     @Service("TagabukidHouseholdService")
     def service
@@ -21,6 +21,9 @@ public class TagabukidNewHouseholdController extends PageFlowController {
     @Service('PersistenceService')
     def persistenceSvc; 
     
+    @Service('LOVService')
+    def lovService;
+    
     def entity;
     boolean pass;
     def searchList;
@@ -28,6 +31,8 @@ public class TagabukidNewHouseholdController extends PageFlowController {
     def attachmentSelectedItem;
     def tag;
     def handler;
+    def entityRelationList = LOV.TAGABUKID_ENTITY_RELATION;
+    
     void init() {
         entity = service.initNew()
         memberListHandler.reload();
@@ -37,13 +42,13 @@ public class TagabukidNewHouseholdController extends PageFlowController {
         //        reset();
     }
     void addressreset() {
-       entity.household_.address = null;
-       entity.text = null;
+        entity.household.address = null;
+        entity.text = null;
     }
     def editAddress() {
         def h = { o->
             if (handler) handler(o);
-            entity.household_.address = o;
+            entity.household.address = o;
             binding.refresh();
         }
         return Inv.lookupOpener( "address:editor", [handler:h, entity:entity, tag: tag] );
@@ -51,23 +56,23 @@ public class TagabukidNewHouseholdController extends PageFlowController {
     
     def initHouseholdAddress(){
         if(entity.copyAddress){
-            entity.household_.address = entity.pangulo.address;
+            entity.household.address = entity.pangulo.address;
         }
     }
     
-      void verifyaddress() {
-        if( !entity.household_.address?.type)
-            throw new Exception("Error in household_ address type-empty. Please check 'type' in household_ address");
-        entity.household_.address.text = TemplateProvider.instance.getResult("templates/address/" + entity.household_.address.type + ".htm", [entity: entity.household_.address] );
-        if(entity.household_.address.text) {
-            entity.household_.address.text = entity.household_.address.text.trim();
-            entity.household_.address.text = entity.household_.address.text.replace(",\n", "\n");
+    void verifyaddress() {
+        if( !entity.household.address?.type)
+        throw new Exception("Error in household address type-empty. Please check 'type' in household address");
+        entity.household.address.text = TemplateProvider.instance.getResult("templates/address/" + entity.household.address.type + ".htm", [entity: entity.household.address] );
+        if(entity.household.address.text) {
+            entity.household.address.text = entity.household.address.text.trim();
+            entity.household.address.text = entity.household.address.text.replace(",\n", "\n");
         }   
         else {
             throw new Exception("Please specify an address");
         }
-        entity.household_.address = entity.household_.address;
-        entity.household_.address.completed = true;
+        entity.household.address = entity.household.address;
+        entity.household.address.completed = true;
     }
 
     void check() {
@@ -81,13 +86,13 @@ public class TagabukidNewHouseholdController extends PageFlowController {
         }
     }
     
-//    void checkhin() {
-//        def dininv = service.verifydin(entity.hin); 
-//        entity.hin = dininv.hin
-//        entity.dininventoryid = dininv.inv.objid
-//        binding.refresh('entity.hin');
-//        pass = true
-//    }
+    //    void checkhin() {
+    //        def dininv = service.verifydin(entity.hin); 
+    //        entity.hin = dininv.hin
+    //        entity.dininventoryid = dininv.inv.objid
+    //        binding.refresh('entity.hin');
+    //        pass = true
+    //    }
 
     def verificationListModel = [
         fetchList: { o-> return searchList;}
@@ -163,13 +168,13 @@ public class TagabukidNewHouseholdController extends PageFlowController {
         return op;
     }
             
-    def getLookupDocumentType(){
-        return Inv.lookupOpener('documenttype:lookup',[
-                onselect :{
-                    entity.documenttype = it;
-                },
-            ])
-    }
+    //    def getLookupDocumentType(){
+    //        return Inv.lookupOpener('documenttype:lookup',[
+    //                onselect :{
+    //                    entity.documenttype = it;
+    //                },
+    //            ])
+    //    }
     
     def memberListHandler = [
         fetchList:{o-> 
@@ -182,12 +187,19 @@ public class TagabukidNewHouseholdController extends PageFlowController {
                 def o = entity.members.find{ it.member.objid == item.member.objid } 
                 if (o) throw new Exception('This member already exist in the list. Please select another one.'); 
             } 
+            if (colname == 'member') { 
+               
+                if (entity.pangulo.objid ==  item.member.objid) throw new Exception('Dili pwede pilion ang PANGULO sa pamilya'); 
+            }
+            if (colname == 'relation') {
+                if (item.realtion == 'PANGULO') throw new Exception('Dili pwede nga duha ang PANGULO sa pamilya.'); 
+            }
         },
         onAddItem: {item-> 
             item.objid = 'MEM'+new UID();
-            item.entityid = entity.objid; 
+            item.hhmid = item.member.objid;
+            item.name = item.member.name;
             entity.members.add(item); 
-            println entity.members
         }, 
         onRemoveItem: {item-> 
             if (!MsgBox.confirm('Are you sure you want to remove this item?')) return false;
@@ -227,20 +239,22 @@ public class TagabukidNewHouseholdController extends PageFlowController {
     //        }
     //    ] as BasicListModel
             
-//    void updateInfo() {
-//                boolean test = false;
-//                docinfo.handler = {
-//                    test = true;
-//                }
-//                if(entity.documenttype.handler ){
-//                    Modal.show(docinfo.update());
-//                    if(!test) throw new BreakException();
-//                }
-//                //check if info is valid
-//                //docinfo.verify();
-//    }
+    //    void updateInfo() {
+    //                boolean test = false;
+    //                docinfo.handler = {
+    //                    test = true;
+    //                }
+    //                if(entity.documenttype.handler ){
+    //                    Modal.show(docinfo.update());
+    //                    if(!test) throw new BreakException();
+    //                }
+    //                //check if info is valid
+    //                //docinfo.verify();
+    //    }
     
-     void updateInfo() {
+    void updateInfo() {
+       
+        addpangulotomember();
         //if requierd na may at least 1 member ang household
         //membersverify();
         boolean test = false;
@@ -249,16 +263,31 @@ public class TagabukidNewHouseholdController extends PageFlowController {
         }
         Modal.show(householdinfo.update());
         if(!test) throw new BreakException();
-        householdinfo.verify();
+        //householdinfo.verify();
     }
     
-//     def membersverify() {
-//        if(!entity.members) 
-//            throw new Exception("Please specify at least one member of household");
-//        if(items.find{!it.lobid})
-//            throw new Exception("All lines of business must be specified. lobid is null");
-//    }
-            
+    //     def membersverify() {
+    //        if(!entity.members) 
+    //            throw new Exception("Please specify at least one member of household");
+    //        if(items.find{!it.lobid})
+    //            throw new Exception("All lines of business must be specified. lobid is null");
+    //    }
+    void addpangulotomember(){
+        if(!entity.members.find{ it.relation == 'PANGULO' } ){
+            def schemaname = 'entity' + (entity.pangulo.type ? entity.pangulo.type :'').toLowerCase(); 
+            def o = [:];
+            o.member = persistenceSvc.read([ _schemaname: schemaname, objid: entity.pangulo.objid ]); 
+
+            o.objid = 'MEM'+new UID();
+            o.hhmid = o.member.objid;
+            o.name = o.member.name;
+            o.relation = 'PANGULO';
+            entity.members.add(o);
+            memberListHandler.reload();
+        }
+        
+        
+    }
     public def addEntity() {
         //        def stype = getEntityType(); 
         //        if ( !stype || stype=='entity' ) stype = 'entityindividual';

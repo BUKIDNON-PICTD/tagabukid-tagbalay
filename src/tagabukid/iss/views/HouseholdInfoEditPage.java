@@ -13,12 +13,12 @@ import com.rameses.rcp.ui.annotations.Template;
  * @author rufino
  */
 @Template({FormPage.class})
-public class DefaultHouseholdInfoEditPage extends javax.swing.JPanel {
+public class HouseholdInfoEditPage extends javax.swing.JPanel {
 
     /**
      * Creates new form DefaultDocumentInfoEditPage
      */
-    public DefaultHouseholdInfoEditPage() {
+    public HouseholdInfoEditPage() {
         initComponents();
     }
 

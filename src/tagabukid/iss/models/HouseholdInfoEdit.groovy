@@ -1,4 +1,4 @@
-package tagabukid.subay.models;
+package tagabukid.iss.models;
 import com.rameses.rcp.common.*
 import com.rameses.rcp.annotations.*
 import com.rameses.osiris2.client.*
@@ -7,7 +7,7 @@ import com.rameses.rulemgmt.constraint.*;
 import com.rameses.rulemgmt.*;
 import java.rmi.server.*;
 
-public abstract class DefaultDocumentInfoEditUtil extends PageFlowController {
+public abstract class HouseholdInfoEdit extends PageFlowController {
 
     @Binding
     def binding;
@@ -23,8 +23,7 @@ public abstract class DefaultDocumentInfoEditUtil extends PageFlowController {
     def existingInfos = [];
     int level = 0;
 
-    @FormTitle
-    def title;
+    
 
     public abstract def execute(); 
 
@@ -32,8 +31,8 @@ public abstract class DefaultDocumentInfoEditUtil extends PageFlowController {
         query.putAll( entity );
         initialInfos?.each { it.level = -1 }; 
         query.infos = initialInfos;
-//        query.taxfees = [];
-//        query.requirements = [];
+        query.taxfees = [];
+        query.requirements = [];
         completed = false;
         return super.start();
     }
@@ -41,18 +40,11 @@ public abstract class DefaultDocumentInfoEditUtil extends PageFlowController {
     def formPanel = [
         getCategory: { key->
             if(!key) return "";
-            def lobname = entity.lobs.find{ it.lobid == key }?.name    
-            return ((lobname) ? lobname : key);
+            def membername = entity.members.find{ it.hhmid == key }?.name    
+            return ((membername) ? membername : key);
         },
         updateBean: {name,value,item->
             item.bean.value = value;
-            if( item.type == 'text' ) item.bean.stringvalue = value;
-            else if( item.type == 'date' ) item.bean.datevalue = value;
-            else if( item.type == 'decimal' ) item.bean.decimalvalue = value;
-            else if( item.type == 'integer' ) item.bean.intvalue = value;
-            else if( item.type == 'lookup' && item.handler == 'revenueitem:lookup' ) {
-                item.bean.lookup = [objid: value.objid, title: value.title ];
-            }
         },
         getControlList: {
             return formInfos;
@@ -60,8 +52,8 @@ public abstract class DefaultDocumentInfoEditUtil extends PageFlowController {
     ] as FormPanelModel;
 
     def sortInfos(sinfos) {
-        def list = sinfos.findAll{it.lob?.objid==null && it.attribute.category==null}?.sort{it.attribute.sortorder};
-        def catGrp = sinfos.findAll{it.lob?.objid==null && it.attribute.category!=null};
+        def list = sinfos.findAll{it.hhm?.objid==null && it.attribute.category==null}?.sort{it.attribute.sortorder};
+        def catGrp = sinfos.findAll{it.hhm?.objid==null && it.attribute.category!=null};
         if(catGrp) {
             def grpList = catGrp.groupBy{ it.attribute.category };
             grpList.each { k,v->
@@ -70,18 +62,18 @@ public abstract class DefaultDocumentInfoEditUtil extends PageFlowController {
                 }
             }
         }
-        list = list + sinfos.findAll{ it.lob?.objid!=null }?.sort{ [it.lob.name, it.attribute.sortorder] }; 
+        list = list + sinfos.findAll{ it.hhm?.objid!=null }?.sort{ [it.hhm.name, it.attribute.sortorder] }; 
         return list; 
     }
 
     def findValue( info ) {
-        if(info.lob?.objid!=null) {
-            def filter = existingInfos.findAll{ it.lob?.objid!=null };
-            def m = filter.find{ it.lob.objid==info.lob.objid && it.attribute.objid == info.attribute.objid };
+        if(info.hhm?.objid!=null) {
+            def filter = existingInfos.findAll{ it.hhm?.objid!=null };
+            def m = filter.find{ it.hhm.objid==info.hhm.objid && it.attribute.objid == info.attribute.objid };
             if(m) return m.value;
         }
         else {
-            def filter = existingInfos.findAll{ it.lob?.objid==null };
+            def filter = existingInfos.findAll{ it.hhm?.objid==null };
             def m = filter.find{ it.attribute.objid == info.attribute.objid };
             if(m) return m.value;
         }
@@ -95,7 +87,7 @@ public abstract class DefaultDocumentInfoEditUtil extends PageFlowController {
             def i = [
                 type:x.attribute.datatype, 
                 caption:x.attribute.caption, 
-                categoryid:  ((x.lob?.objid!=null) ? x.lob.objid : x.attribute.category),
+                categoryid:  ((x.hhm?.objid!=null) ? x.hhm.objid : x.attribute.category),
                 handler: x.attribute.handler,
                 name:x.attribute.name, 
                 bean: x,
@@ -135,9 +127,10 @@ public abstract class DefaultDocumentInfoEditUtil extends PageFlowController {
      public void loadInfos() {
         infos.clear();
         def result = execute();
+        println result.infos;
+        title = result.title;
         //phase 0 is the looping phase.  
         if( result.phase > 1 ) {
-            println result.infos
             query.infos.addAll(result.infos);
             if( !query.infos )
                 throw new Exception("There must be at least one value for infos");
