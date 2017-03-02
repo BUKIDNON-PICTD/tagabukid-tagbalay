@@ -44,22 +44,8 @@
             <transition to="edit-contact" caption="Back" mnemonic="B" name="back" />
             <transition to="confirm" caption="Next" name="next" mnemonic="N" action="updateInfo" />
         </page>
-<!--        <process name="check-din" action="checkdin">
-            <transition to="edit-generalinfo" cond="#{pass==false}"/>
-            <transition to="check-title" cond="#{pass==true}" action="updateInfo"/>
-        </process>-->
-        
-<!--        <process name="check-title" action="check">
-            <transition to="verify-documentname" cond="#{pass==false}"/>
-            <transition to="edit-attachments" cond="#{pass==true}"/>
-        </process>-->
-        
-<!--        <page name="verify-documentname" title="Verify Household Title">
-            <transition to="edit-generalinfo" caption="Back" mnemonic="B"/>
-            <transition to="edit-attachments" caption="Next" name="next" mnemonic="N" action="verify"/>
-        </page>
 
-        <page name="edit-attachments" title="Household Attachments">
+<!--        <page name="edit-attachments" title="Household Attachments">
             <transition to="edit-generalinfo" caption="Back" mnemonic="B" name="back" />
             <transition to="confirm" caption="Next" name="next" mnemonic="N" />
         </page>-->
@@ -81,8 +67,8 @@
         <page name="edit-householdaddress" template="tagabukid.iss.views.EditHouseholdAddressPage"/>
         <page name="edit-members" template="tagabukid.iss.views.EditHouseholdMemberInfoPage"/>
         <page name="edit-contact" template="tagabukid.iss.views.EditHouseholdContactInfoPage"/>
-<!--        <page name="verify-documentname" template="tagabukid.iss.views.EditHouseholdHeadVerificationPage"/>        
-        <page name="edit-attachments" template="tagabukid.iss.views.EditHouseholdAttachmentPage"/>-->
+        <page name="verify-householdheadname" template="tagabukid.iss.views.EditHouseholdHeadVerificationPage"/>        
+        <page name="edit-attachments" template="tagabukid.iss.views.EditHouseholdAttachmentPage"/>
         <page name="confirm" template="tagabukid.iss.views.EditHouseholdConfirmPage"/>
         <page name="save-success" template="tagabukid.iss.views.EditHouseholdSuccessPage"/>
     </pages>

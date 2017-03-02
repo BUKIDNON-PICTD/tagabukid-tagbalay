@@ -37,7 +37,6 @@ public class TagabukidNewHouseholdController extends PageFlowController {
         entity = service.initNew()
         memberListHandler.reload();
         addressreset();
-       
         //        loadAttachments()
         //        reset();
     }
@@ -113,9 +112,9 @@ public class TagabukidNewHouseholdController extends PageFlowController {
         return entity
     }
             
-    def attachmentListHandler = [
-        fetchList : { return entity.attachments },
-    ] as BasicListModel
+//    def attachmentListHandler = [
+//        fetchList : { return entity.attachments },
+//    ] as BasicListModel
             
     //    void loadAttachments(){
     //        entity.attachments = [];
@@ -129,38 +128,38 @@ public class TagabukidNewHouseholdController extends PageFlowController {
     //        attachmentListHandler?.load();
     //    }
 
-    def addAttachment(){
-        return InvokerUtil.lookupOpener('upload:attachment', [
-                entity : entity,
-                afterupload: {
-                    loadAttachments();
-                }
-            ]);
-    }
+//    def addAttachment(){
+//        return InvokerUtil.lookupOpener('upload:attachment', [
+//                entity : entity,
+//                afterupload: {
+//                    loadAttachments();
+//                }
+//            ]);
+//    }
+//
+//    void deleteAttachment(){
+//        if (!attachmentSelectedItem) return;
+//        if (MsgBox.confirm('Delete selected Attachment?')){
+//            TagabukidDBImageUtil.getInstance().deleteImage(attachmentSelectedItem.objid);
+//            loadAttachments();
+//        }
+//    }
 
-    void deleteAttachment(){
-        if (!attachmentSelectedItem) return;
-        if (MsgBox.confirm('Delete selected Attachment?')){
-            TagabukidDBImageUtil.getInstance().deleteImage(attachmentSelectedItem.objid);
-            loadAttachments();
-        }
-    }
 
-
-    def viewAttachment(){
-        if (!attachmentSelectedItem) return null;
-
-        if (attachmentSelectedItem.extension.contains("pdf")){
-            return InvokerUtil.lookupOpener('attachmentpdf:view', [
-                    entity : attachmentSelectedItem,
-                ]); 
-        }else{
-            return InvokerUtil.lookupOpener('attachment:view', [
-                    entity : attachmentSelectedItem,
-                ]); 
-        }
-
-    }
+//    def viewAttachment(){
+//        if (!attachmentSelectedItem) return null;
+//
+//        if (attachmentSelectedItem.extension.contains("pdf")){
+//            return InvokerUtil.lookupOpener('attachmentpdf:view', [
+//                    entity : attachmentSelectedItem,
+//                ]); 
+//        }else{
+//            return InvokerUtil.lookupOpener('attachment:view', [
+//                    entity : attachmentSelectedItem,
+//                ]); 
+//        }
+//
+//    }
             
     def print() {
         def op = Inv.lookupOpener( "dts:din", [entity: entity] );
@@ -168,14 +167,6 @@ public class TagabukidNewHouseholdController extends PageFlowController {
         return op;
     }
             
-    //    def getLookupDocumentType(){
-    //        return Inv.lookupOpener('documenttype:lookup',[
-    //                onselect :{
-    //                    entity.documenttype = it;
-    //                },
-    //            ])
-    //    }
-    
     def memberListHandler = [
         fetchList:{o-> 
             if (!entity) return null; 
@@ -211,46 +202,6 @@ public class TagabukidNewHouseholdController extends PageFlowController {
     def getLookupMember() {
         return InvokerUtil.lookupOpener('entity:lookup', ['query.type': 'INDIVIDUAL','allowSelectEntityType' : false]); 
     }             
-            
-    def getDetailHandler(){
-        if(entity.documenttype.haschild){
-            return InvokerUtil.lookupOpener('documentchild:form',[
-                    entity: entity
-                ])
-        }
-    }
-    
-    //    def listHandler = [
-    //        fetchList : { return entity.child },
-    //        onRemoveItem : {
-    //            if (MsgBox.confirm('Delete item?')){                
-    //                entity.child.remove(it)
-    //                listHandler?.load();
-    //                return true;
-    //            }
-    //            return false;
-    //        },
-    //        onColumnUpdate:{item,colName ->
-    //            entity.child.each{y ->
-    //                if (item.din == y.din){
-    //                    y.message = item.remarks
-    //                }
-    //            }
-    //        }
-    //    ] as BasicListModel
-            
-    //    void updateInfo() {
-    //                boolean test = false;
-    //                docinfo.handler = {
-    //                    test = true;
-    //                }
-    //                if(entity.documenttype.handler ){
-    //                    Modal.show(docinfo.update());
-    //                    if(!test) throw new BreakException();
-    //                }
-    //                //check if info is valid
-    //                //docinfo.verify();
-    //    }
     
     void updateInfo() {
         addpangulotomember();

@@ -25,6 +25,7 @@ public class TagabukidHouseholdInfoUtil {
     def update() {
         def e = [:];
         e.putAll( entity );
+        println entity.householdinfos
         if( !entity.householdinfos ) entity.householdinfos = [];
         return InvokerUtil.lookupOpener("iss:householdinfos", [
             entity: e,
