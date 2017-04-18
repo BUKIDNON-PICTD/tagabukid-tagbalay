@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tagabukid.iss.views;
+package tagabukid.tagbalay.views;
 
 
 import com.rameses.rcp.ui.annotations.Template;
@@ -79,7 +79,6 @@ public class EditHouseholdConfirmPage extends javax.swing.JPanel {
             })
         });
         xDataTable3.setHandler("householdinfo.listModel");
-        xDataTable3.setId("householdinfo.listModel");
 
         com.rameses.rcp.control.border.XTitledBorder xTitledBorder2 = new com.rameses.rcp.control.border.XTitledBorder();
         xTitledBorder2.setTitle("Unsa ang mga ngalan sa mga miyembro sa pamilya?");

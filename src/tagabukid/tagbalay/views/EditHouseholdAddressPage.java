@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tagabukid.iss.views;
+package tagabukid.tagbalay.views;
 
 
 import com.rameses.rcp.ui.annotations.StyleSheet;
@@ -36,7 +36,7 @@ public class EditHouseholdAddressPage extends javax.swing.JPanel {
         addressComponent1 = new com.rameses.enterprise.views.AddressComponent();
 
         addressComponent1.setBorder(javax.swing.BorderFactory.createTitledBorder("Nahimutangan sa Panimalay"));
-        addressComponent1.setName("entity.household_.address"); // NOI18N
+        addressComponent1.setName("entity.household.address"); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
