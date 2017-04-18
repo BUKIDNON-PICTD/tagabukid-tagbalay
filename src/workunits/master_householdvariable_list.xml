@@ -3,7 +3,7 @@
           entityName="household_variable">
     <invokers>
         <invoker folderid="/explorer/master/issmaster" caption="Household Variables" target="window" index="2" role="MASTER"/>
-        <invoker folderid="/home/iss/master" caption="Household Variables" target="window" index="2" role="MASTER"/>
+        <invoker folderid="/home/tagbalay/master" caption="Household Variables" target="window" index="2" role="MASTER"/>
     </invokers>
     
     <code>

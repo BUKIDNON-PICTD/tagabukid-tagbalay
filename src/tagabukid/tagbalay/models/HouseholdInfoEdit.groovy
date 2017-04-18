@@ -1,4 +1,4 @@
-package tagabukid.iss.models;
+package tagabukid.tagbalay.models;
 import com.rameses.rcp.common.*
 import com.rameses.rcp.annotations.*
 import com.rameses.osiris2.client.*

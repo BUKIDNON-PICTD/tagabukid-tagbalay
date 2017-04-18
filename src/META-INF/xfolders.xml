@@ -1,18 +1,18 @@
 <folders>
     <folder id="explorer">
         <folder id="txn">
-            <folder id="isstranscation" caption="Integrated Survey System" index="1"/>
+            <folder id="tagbalaytranscation" caption="Integrated Survey System" index="1"/>
         </folder>
         <folder id="master">
-            <folder id="issmaster" caption="ISS Master" index="1"/>
+            <folder id="tagbalaymaster" caption="TagBalay Master" index="1"/>
         </folder>
         <folder id="rulemgmt" caption="Rule Management">
-            <folder id="iss" caption="Integrated Survey System" index="5"/>
+            <folder id="tagbalay" caption="Integrated Survey System" index="5"/>
         </folder>  
     </folder> 
     <folder id="home">
-        <folder id="iss" caption="Integrated Survey System">
-            <folder id="household_" caption="Household" index="4"/>
+        <folder id="tagbalay" caption="Integrated Survey System">
+            <folder id="household" caption="Household" index="4"/>
             <folder id="master" caption="Master File" index="5"/>
         </folder>
     </folder>

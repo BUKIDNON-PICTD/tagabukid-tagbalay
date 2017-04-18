@@ -1,5 +1,5 @@
 <workunit extends="wtemplates/RuleMgmtController.xml" serviceName="RuleMgmtService" tag="householdinfo">
     <invokers>
-        <invoker folderid="/explorer/rulemgmt/iss" caption="Household Info Rules" action="init" index="1" srole="RULE_AUTHOR"/>
+        <invoker folderid="/explorer/rulemgmt/tagbalay" caption="Household Info Rules" action="init" index="1" srole="RULE_AUTHOR"/>
     </invokers>
 </workunit>

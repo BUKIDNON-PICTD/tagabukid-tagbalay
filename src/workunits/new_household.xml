@@ -1,14 +1,14 @@
 <workunit>
     <invokers>
         <invoker folderid="/explorer/txn/isstransaction" caption="New Household"  action="start" target="window" index="1" />
-        <!--<invoker folderid="/home/iss/household" caption="New Household"  action="start" target="window" index="1" />-->
-        <invoker folderid="/home/iss" caption="New Household"  action="start" target="window" index="1" />
+        <!--<invoker folderid="/home/tagbalay/household" caption="New Household"  action="start" target="window" index="1" />-->
+        <invoker folderid="/home/tagbalay" caption="New Household"  action="start" target="window" index="1" />
         <invoker type="extActions" caption="Print"  icon="images/toolbars/printer.png" 
             action="print" visibleWhen="#{state=='save-success'}"/>
         
     </invokers>
     
-    <code class="tagabukid.iss.models.TagabukidNewHouseholdController" />   
+    <code class="tagabukid.tagbalay.models.TagabukidNewHouseholdController" />   
     
     <pageflow>
         <start>
@@ -63,14 +63,14 @@
     </pageflow>
     
     <pages>
-        <page name="edit-generalinfo" template="tagabukid.iss.views.EditHouseholdGeneralInfoPage"/>
-        <page name="edit-householdaddress" template="tagabukid.iss.views.EditHouseholdAddressPage"/>
-        <page name="edit-members" template="tagabukid.iss.views.EditHouseholdMemberInfoPage"/>
-        <page name="edit-contact" template="tagabukid.iss.views.EditHouseholdContactInfoPage"/>
-        <page name="verify-householdheadname" template="tagabukid.iss.views.EditHouseholdHeadVerificationPage"/>        
-        <page name="edit-attachments" template="tagabukid.iss.views.EditHouseholdAttachmentPage"/>
-        <page name="confirm" template="tagabukid.iss.views.EditHouseholdConfirmPage"/>
-        <page name="save-success" template="tagabukid.iss.views.EditHouseholdSuccessPage"/>
+        <page name="edit-generalinfo" template="tagabukid.tagbalay.views.EditHouseholdGeneralInfoPage"/>
+        <page name="edit-householdaddress" template="tagabukid.tagbalay.views.EditHouseholdAddressPage"/>
+        <page name="edit-members" template="tagabukid.tagbalay.views.EditHouseholdMemberInfoPage"/>
+        <page name="edit-contact" template="tagabukid.tagbalay.views.EditHouseholdContactInfoPage"/>
+        <page name="verify-householdheadname" template="tagabukid.tagbalay.views.EditHouseholdHeadVerificationPage"/>        
+        <page name="edit-attachments" template="tagabukid.tagbalay.views.EditHouseholdAttachmentPage"/>
+        <page name="confirm" template="tagabukid.tagbalay.views.EditHouseholdConfirmPage"/>
+        <page name="save-success" template="tagabukid.tagbalay.views.EditHouseholdSuccessPage"/>
     </pages>
     
 </workunit>

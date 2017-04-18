@@ -27,7 +27,7 @@ public class TagabukidHouseholdInfoUtil {
         e.putAll( entity );
         println entity.householdinfos
         if( !entity.householdinfos ) entity.householdinfos = [];
-        return InvokerUtil.lookupOpener("iss:householdinfos", [
+        return InvokerUtil.lookupOpener("tagbalay:householdinfos", [
             entity: e,
             existingInfos: entity.householdinfos,
             handler:{ result ->
