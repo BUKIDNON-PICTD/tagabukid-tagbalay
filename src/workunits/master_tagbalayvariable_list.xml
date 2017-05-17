@@ -1,6 +1,6 @@
 <workunit extends="wtemplates/ListController.xml" 
-          serviceName="TagabukidHouseholdVariableService" 
-          entityName="household_variable">
+          serviceName="TagabukidTagBalayVariableService" 
+          entityName="tagbalay_variable">
     <invokers>
         <invoker folderid="/explorer/master/tagbalaymaster" caption="Household Variables" target="window" index="2" />
         <invoker folderid="/home/tagbalay/master" caption="Household Variables" target="window" index="2"/>
@@ -14,7 +14,7 @@
             import com.rameses.osiris2.common.*;
             import com.rameses.osiris2.common.* 
 
-            class HouseholdVariableListModel extends DefaultListController { 
+            class TagBalayVariableListModel extends DefaultListController { 
 
 
             } 

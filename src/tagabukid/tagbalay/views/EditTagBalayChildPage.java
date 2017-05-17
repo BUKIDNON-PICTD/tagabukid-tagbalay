@@ -11,12 +11,12 @@ package tagabukid.tagbalay.views;
  *
  * @author rufino
  */
-public class EditHouseholdChildPage extends javax.swing.JPanel {
+public class EditTagBalayChildPage extends javax.swing.JPanel {
 
     /**
      * Creates new form DocumentChildPage
      */
-    public EditHouseholdChildPage() {
+    public EditTagBalayChildPage() {
         initComponents();
     }
 

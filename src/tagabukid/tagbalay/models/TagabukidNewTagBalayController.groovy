@@ -7,15 +7,15 @@ import com.rameses.gov.etracs.bpls.controller.*;
 import com.rameses.util.*;
 import tagabukid.utils.*;
         
-public class TagabukidNewHouseholdController extends PageFlowController {
+public class TagabukidNewTagBalayController extends PageFlowController {
             
-    @Script("TagabukidHouseholdInfoUtil")
-    def householdinfo
+    @Script("TagabukidTagBalayInfoUtil")
+    def tagbalayinfo
     
-    @Service("TagabukidHouseholdService")
+    @Service("TagabukidTagBalayService")
     def service
             
-    @Service("TagabukidHouseholdHeadVerificationService")
+    @Service("TagabukidTagBalayHeadVerificationService")
     def verifySvc
             
     @Service('PersistenceService')
@@ -41,37 +41,37 @@ public class TagabukidNewHouseholdController extends PageFlowController {
         //        reset();
     }
     void addressreset() {
-        entity.household.address = null;
+        entity.tagbalay.address = null;
         entity.text = null;
     }
     def editAddress() {
         def h = { o->
             if (handler) handler(o);
-            entity.household.address = o;
+            entity.tagbalay.address = o;
             binding.refresh();
         }
         return Inv.lookupOpener( "address:editor", [handler:h, entity:entity, tag: tag] );
     }
     
-    def initHouseholdAddress(){
+    def initTagBalayAddress(){
         if(entity.copyAddress){
-            entity.household.address = entity.pangulo.address;
+            entity.tagbalay.address = entity.pangulo.address;
         }
     }
     
     void verifyaddress() {
-        if( !entity.household.address?.type)
-        throw new Exception("Error in household address type-empty. Please check 'type' in household address");
-        entity.household.address.text = TemplateProvider.instance.getResult("templates/address/" + entity.household.address.type + ".htm", [entity: entity.household.address] );
-        if(entity.household.address.text) {
-            entity.household.address.text = entity.household.address.text.trim();
-            entity.household.address.text = entity.household.address.text.replace(",\n", "\n");
+        if( !entity.tagbalay.address?.type)
+        throw new Exception("Error in tagbalay address type-empty. Please check 'type' in tagbalay address");
+        entity.tagbalay.address.text = TemplateProvider.instance.getResult("templates/address/" + entity.tagbalay.address.type + ".htm", [entity: entity.tagbalay.address] );
+        if(entity.tagbalay.address.text) {
+            entity.tagbalay.address.text = entity.tagbalay.address.text.trim();
+            entity.tagbalay.address.text = entity.tagbalay.address.text.replace(",\n", "\n");
         }   
         else {
             throw new Exception("Please specify an address");
         }
-        entity.household.address = entity.household.address;
-        entity.household.address.completed = true;
+        entity.tagbalay.address = entity.tagbalay.address;
+        entity.tagbalay.address.completed = true;
     }
 
     void check() {
@@ -205,20 +205,20 @@ public class TagabukidNewHouseholdController extends PageFlowController {
     
     void updateInfo() {
         addpangulotomember();
-        //if requierd na may at least 1 member ang household
+        //if requierd na may at least 1 member ang tagbalay
         //membersverify();
         boolean test = false;
-        householdinfo.handler = {
+        tagbalayinfo.handler = {
             test = true;
         }
-        Modal.show(householdinfo.update());
+        Modal.show(tagbalayinfo.update());
         if(!test) throw new BreakException();
-        //householdinfo.verify();
+        //tagbalayinfo.verify();
     }
     
     //     def membersverify() {
     //        if(!entity.members) 
-    //            throw new Exception("Please specify at least one member of household");
+    //            throw new Exception("Please specify at least one member of tagbalay");
     //        if(items.find{!it.lobid})
     //            throw new Exception("All lines of business must be specified. lobid is null");
     //    }

@@ -1,7 +1,7 @@
 <workunit>
     
     <invokers>
-        <invoker type="tagbalay:householdinfos" caption="Edit Household Info" action="start" target="popup"/>
+        <invoker type="tagbalay:tagbalayinfos" caption="Edit Household Info" action="start" target="popup"/>
     </invokers>
     
     <code>
@@ -12,9 +12,9 @@
         import com.rameses.osiris2.common.*
         import java.rmi.server.*;
         
-        public class HouseholdInfoEditController extends tagabukid.tagbalay.models.HouseholdInfoEdit{
+        public class TagBalayInfoEditController extends tagabukid.tagbalay.models.TagBalayInfoEdit{
 
-            @Service("TagabukidHouseholdInfoRuleService")
+            @Service("TagabukidTagBalayInfoRuleService")
             def service;
             
             @FormTitle
@@ -49,7 +49,7 @@
     </pageflow>
     
     <pages>
-        <page name="specify-info" template="tagabukid.tagbalay.views.HouseholdInfoEditPage"/>
+        <page name="specify-info" template="tagabukid.tagbalay.views.TagBalayInfoEditPage"/>
     </pages>
     
 </workunit>

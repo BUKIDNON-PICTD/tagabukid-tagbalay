@@ -14,12 +14,12 @@ import com.rameses.rcp.ui.annotations.Template;
  * @author rufino
  */
 @Template({FormPage.class})
-public class EditHouseholdSuccessPage extends javax.swing.JPanel {
+public class EditTagBalaySuccessPage extends javax.swing.JPanel {
 
     /**
      * Creates new form SuccessPage
      */
-    public EditHouseholdSuccessPage() {
+    public EditTagBalaySuccessPage() {
         initComponents();
     }
 

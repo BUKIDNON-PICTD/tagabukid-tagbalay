@@ -14,12 +14,12 @@ import com.rameses.rcp.ui.annotations.Template;
  * @author rufino
  */
 @Template({FormPage.class})
-public class EditHouseholdHeadVerificationPage extends javax.swing.JPanel {
+public class EditTagBalayHeadVerificationPage extends javax.swing.JPanel {
 
     /**
      * Creates new form DocumentTitleVerificationPage
      */
-    public EditHouseholdHeadVerificationPage() {
+    public EditTagBalayHeadVerificationPage() {
         initComponents();
     }
 

@@ -13,14 +13,14 @@ import com.rameses.rcp.ui.annotations.Template;
  *
  * @author rufino
  */
-@Template({HouseholdGeneralInfoSectionTemplate.class})
+@Template({TagBalayGeneralInfoSectionTemplate.class})
 @StyleSheet
-public class EditHouseholdMemberInfoPage extends javax.swing.JPanel {
+public class EditTagBalayMemberInfoPage extends javax.swing.JPanel {
 
     /**
      * Creates new form EditDocumentAttachmentPage
      */
-    public EditHouseholdMemberInfoPage() {
+    public EditTagBalayMemberInfoPage() {
         initComponents();
     }
 

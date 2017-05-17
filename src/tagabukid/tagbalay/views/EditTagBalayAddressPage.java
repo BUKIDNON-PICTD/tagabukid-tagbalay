@@ -5,20 +5,22 @@
  */
 package tagabukid.tagbalay.views;
 
-import com.rameses.osiris2.themes.FormPage;
+
+import com.rameses.rcp.ui.annotations.StyleSheet;
 import com.rameses.rcp.ui.annotations.Template;
 
 /**
  *
  * @author rufino
  */
-@Template({FormPage.class})
-public class HouseholdInfoEditPage extends javax.swing.JPanel {
+@Template({TagBalayGeneralInfoSectionTemplate.class})
+@StyleSheet
+public class EditTagBalayAddressPage extends javax.swing.JPanel {
 
     /**
-     * Creates new form DefaultDocumentInfoEditPage
+     * Creates new form EditDocumentAttachmentPage
      */
-    public HouseholdInfoEditPage() {
+    public EditTagBalayAddressPage() {
         initComponents();
     }
 
@@ -31,39 +33,30 @@ public class HouseholdInfoEditPage extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        xScrollPane1 = new com.rameses.rcp.control.XScrollPane();
-        xFormPanel1 = new com.rameses.rcp.control.XFormPanel();
+        addressComponent1 = new com.rameses.enterprise.views.AddressComponent();
 
-        xScrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(180, 180, 180)));
-
-        xFormPanel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        xFormPanel1.setCaptionWidth(220);
-        xFormPanel1.setDynamic(true);
-        xFormPanel1.setName("formPanel"); // NOI18N
-        xFormPanel1.setShowCategory(true);
-        xScrollPane1.setViewportView(xFormPanel1);
+        addressComponent1.setBorder(javax.swing.BorderFactory.createTitledBorder("Nahimutangan sa Panimalay"));
+        addressComponent1.setName("entity.tagbalay.address"); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(xScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 576, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(addressComponent1, javax.swing.GroupLayout.PREFERRED_SIZE, 601, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 66, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(xScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 524, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(addressComponent1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(420, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.rameses.rcp.control.XFormPanel xFormPanel1;
-    private com.rameses.rcp.control.XScrollPane xScrollPane1;
+    private com.rameses.enterprise.views.AddressComponent addressComponent1;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,7 +1,7 @@
 <workunit>
     <invokers>
-        <invoker type="household_variable:open" action="open" caption="Household Variable"/>
-        <invoker type="household_variable:create" action="init" caption="Household Variable"/>
+        <invoker type="tagbalay_variable:open" action="open" caption="Household Variable"/>
+        <invoker type="tagbalay_variable:create" action="init" caption="Household Variable"/>
     </invokers>
     <code>
     <![CDATA[
@@ -9,10 +9,10 @@
         import com.rameses.rcp.annotations.*;
         import com.rameses.osiris2.common.*;
 
-        class HouseholdVariableController extends CRUDController {
+        class TagBalayVariableController extends CRUDController {
 
-            String serviceName = 'TagabukidHouseholdVariableService'
-            String entityName = 'household_variable'
+            String serviceName = 'TagabukidTagBalayVariableService'
+            String entityName = 'tagbalay_variable'
             String prefixId = 'HV'
             def arrayvalue
             def datatypes = LOV.VAR_DATA_TYPES

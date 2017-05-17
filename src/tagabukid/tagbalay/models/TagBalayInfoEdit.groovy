@@ -7,7 +7,7 @@ import com.rameses.rulemgmt.constraint.*;
 import com.rameses.rulemgmt.*;
 import java.rmi.server.*;
 
-public abstract class HouseholdInfoEdit extends PageFlowController {
+public abstract class TagBalayInfoEdit extends PageFlowController {
 
     @Binding
     def binding;

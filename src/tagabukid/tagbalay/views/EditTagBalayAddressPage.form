@@ -27,7 +27,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="addressComponent1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="403" max="32767" attributes="0"/>
+              <EmptySpace pref="420" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -40,7 +40,7 @@
             <TitledBorder title="Nahimutangan sa Panimalay"/>
           </Border>
         </Property>
-        <Property name="name" type="java.lang.String" value="entity.household.address" noResource="true"/>
+        <Property name="name" type="java.lang.String" value="entity.tagbalay.address" noResource="true"/>
       </Properties>
     </Component>
   </SubComponents>

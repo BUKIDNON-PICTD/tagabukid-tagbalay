@@ -15,12 +15,12 @@ import com.rameses.rcp.ui.annotations.Template;
  */
 @Template({FormPage.class})
 @StyleSheet
-public class HouseholdGeneralInfoSectionTemplate extends javax.swing.JPanel {
+public class TagBalayGeneralInfoSectionTemplate extends javax.swing.JPanel {
 
     /**
      * Creates new form ConfirmPage
      */
-    public HouseholdGeneralInfoSectionTemplate() {
+    public TagBalayGeneralInfoSectionTemplate() {
         initComponents();
     }
 
@@ -49,7 +49,7 @@ public class HouseholdGeneralInfoSectionTemplate extends javax.swing.JPanel {
         setLayout(new java.awt.BorderLayout());
 
         com.rameses.rcp.control.border.XTitledBorder xTitledBorder1 = new com.rameses.rcp.control.border.XTitledBorder();
-        xTitledBorder1.setTitle("Household General Information");
+        xTitledBorder1.setTitle("General Information");
         xHorizontalPanel1.setBorder(xTitledBorder1);
         xHorizontalPanel1.setBorderSeparator(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         xHorizontalPanel1.setPreferredSize(new java.awt.Dimension(1008, 149));
@@ -75,6 +75,7 @@ public class HouseholdGeneralInfoSectionTemplate extends javax.swing.JPanel {
         jScrollPane1.setPreferredSize(new java.awt.Dimension(0, 63));
 
         xTextArea1.setEditable(false);
+        xTextArea1.setText("entity.tagbalay.address.text");
         xTextArea1.setCaption("Nahimutangan sa Panimalay");
         xTextArea1.setName("entity.household.address.text"); // NOI18N
         jScrollPane1.setViewportView(xTextArea1);
