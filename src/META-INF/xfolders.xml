@@ -7,11 +7,11 @@
             <folder id="tagbalaymaster" caption="TagBalay Master" index="1"/>
         </folder>
         <folder id="rulemgmt" caption="Rule Management">
-            <folder id="tagbalay" caption="Integrated Survey System" index="5"/>
+            <folder id="tagbalay" caption="TagBalay" index="5"/>
         </folder>  
     </folder> 
     <folder id="home">
-        <folder id="tagbalay" caption="Integrated Survey System">
+        <folder id="tagbalay" caption="TagBalay">
             <folder id="household" caption="Household" index="4"/>
             <folder id="master" caption="Master File" index="5"/>
         </folder>

@@ -1,7 +1,7 @@
 <workunit>
     
     <invokers>
-        <invoker type="tagabalay:householdinfos" caption="Edit Household Info" action="start" target="popup"/>
+        <invoker type="tagbalay:householdinfos" caption="Edit Household Info" action="start" target="popup"/>
     </invokers>
     
     <code>

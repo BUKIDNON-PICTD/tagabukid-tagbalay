@@ -1,15 +1,7 @@
-<!--<workunit extends="com/rameses/seti2/templates/CrudList.xml" schemaName="subayhousehold_variable">
-    <invokers>
-        <invoker folderid="/explorer/master/subaymaster" caption="Household Variables" action="init" target="window" index="2" role="MASTER"/>
-        <invoker folderid="/home/dts/master" caption="Household Variables" action="init" target="window" index="2" role="MASTER"/>
-    </invokers>
-</workunit>-->
-
 <workunit>
     <invokers>
         <invoker type="household_variable:open" action="open" caption="Household Variable"/>
-        <invoker type="household_variable:create" action="init" caption="Household Variable" 
-                role="MASTER" permission="household_variable.create"/>
+        <invoker type="household_variable:create" action="init" caption="Household Variable"/>
     </invokers>
     <code>
     <![CDATA[
