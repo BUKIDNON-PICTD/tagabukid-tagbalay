@@ -78,7 +78,8 @@ public class EditTagBalayConfirmPage extends javax.swing.JPanel {
                 , new Object[]{"typeHandler", new com.rameses.rcp.common.TextColumnHandler()}
             })
         });
-        xDataTable3.setHandler("householdinfo.listModel");
+        xDataTable3.setHandler("tagbalayinfo.listModel");
+        xDataTable3.setId("tagbalayinfo.listModel");
 
         com.rameses.rcp.control.border.XTitledBorder xTitledBorder2 = new com.rameses.rcp.control.border.XTitledBorder();
         xTitledBorder2.setTitle("Unsa ang mga ngalan sa mga miyembro sa pamilya?");

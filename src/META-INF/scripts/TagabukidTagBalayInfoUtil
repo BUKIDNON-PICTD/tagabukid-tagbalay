@@ -5,7 +5,7 @@ import com.rameses.osiris2.common.*
 import java.rmi.server.*;
 import com.rameses.util.*;
 
-public class TagabukidHouseholdInfoUtil {
+public class TagabukidTagBalayInfoUtil {
      
     @Caller
     def caller;
@@ -18,7 +18,7 @@ public class TagabukidHouseholdInfoUtil {
 
     def listModel = [
        fetchList: { o-> 
-            return entity.householdinfos; 
+            return entity.tagbalayinfos; 
         }
     ] as BasicListModel;
 
@@ -26,12 +26,13 @@ public class TagabukidHouseholdInfoUtil {
         def e = [:];
         e.putAll( entity );
        
-        if( !entity.householdinfos ) entity.householdinfos = [];
-        return InvokerUtil.lookupOpener("tagbalay:householdinfos", [
+        if( !entity.tagbalayinfos ) entity.tagbalayinfos = [];
+        return InvokerUtil.lookupOpener("tagbalay:tagbalayinfos", [
             entity: e,
-            existingInfos: entity.householdinfos,
+            existingInfos: entity.tagbalayinfos,
             handler:{ result ->
-                entity.householdinfos = result.infos;
+                println result.infos
+                entity.tagbalayinfos = result.infos;
                 listModel.reload();
                 if(handler) handler();
             }
@@ -40,9 +41,9 @@ public class TagabukidHouseholdInfoUtil {
     }
     
     def verify() {
-        if(!entity.householdinfos) 
+        if(!entity.tagbalayinfos) 
             throw new Exception("Please specify at least one info for household");
-        def unedited = entity.householdinfos.findAll{ it.value == null };
+        def unedited = entity.tagbalayinfos.findAll{ it.value == null };
         if( unedited ) {
             def buff = new StringBuffer();
             unedited.each {

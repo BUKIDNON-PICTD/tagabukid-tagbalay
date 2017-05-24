@@ -54,6 +54,7 @@ public class TagabukidNewTagBalayController extends PageFlowController {
     }
     
     def initTagBalayAddress(){
+        entity.tagbalay.address = null;
         if(entity.copyAddress){
             entity.tagbalay.address = entity.pangulo.address;
         }
