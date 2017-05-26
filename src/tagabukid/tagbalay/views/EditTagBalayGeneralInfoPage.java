@@ -34,6 +34,7 @@ public class EditTagBalayGeneralInfoPage extends javax.swing.JPanel {
 
         xFormPanel1 = new com.rameses.rcp.control.XFormPanel();
         xDateField2 = new com.rameses.rcp.control.XDateField();
+        xComboBox1 = new com.rameses.rcp.control.XComboBox();
         entityLookup2 = new com.rameses.entity.components.EntityLookup();
         xCheckBox1 = new com.rameses.rcp.control.XCheckBox();
 
@@ -45,9 +46,17 @@ public class EditTagBalayGeneralInfoPage extends javax.swing.JPanel {
         xDateField2.setRequired(true);
         xFormPanel1.add(xDateField2);
 
+        xComboBox1.setCaption("Pangalan sa nag survey");
+        xComboBox1.setExpression("#{item.fullname}");
+        xComboBox1.setItemKey("");
+        xComboBox1.setItems("surveyors");
+        xComboBox1.setName("entity.surveyor"); // NOI18N
+        xComboBox1.setPreferredSize(new java.awt.Dimension(300, 20));
+        xFormPanel1.add(xComboBox1);
+
         entityLookup2.setCaption("Pangalan sa Pangulo sa Pamilya");
         entityLookup2.setExpression("#{entity.name}");
-        entityLookup2.setName("entity.pangulo"); // NOI18N
+        entityLookup2.setName("entity.tagbalay.pangulo"); // NOI18N
         entityLookup2.setPreferredSize(new java.awt.Dimension(0, 21));
         entityLookup2.setRequired(true);
         xFormPanel1.add(entityLookup2);
@@ -71,7 +80,7 @@ public class EditTagBalayGeneralInfoPage extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(xFormPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(537, Short.MAX_VALUE))
+                .addContainerGap(515, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -79,6 +88,7 @@ public class EditTagBalayGeneralInfoPage extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.rameses.entity.components.EntityLookup entityLookup2;
     private com.rameses.rcp.control.XCheckBox xCheckBox1;
+    private com.rameses.rcp.control.XComboBox xComboBox1;
     private com.rameses.rcp.control.XDateField xDateField2;
     private com.rameses.rcp.control.XFormPanel xFormPanel1;
     // End of variables declaration//GEN-END:variables

@@ -41,10 +41,10 @@
   <SubComponents>
     <Component class="com.rameses.rcp.control.XLabel" name="xLabel1">
       <Properties>
+        <Property name="expression" type="java.lang.String" value="Survey successfully created. Please use the ff. identification no. for tracking purposes."/>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="18" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Document successfully created. Please use the ff. identification no. for tracking purposes."/>
       </Properties>
     </Component>
     <Component class="com.rameses.rcp.control.XTextField" name="xTextField1">
@@ -52,7 +52,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="36" style="1"/>
         </Property>
-        <Property name="name" type="java.lang.String" value="entity.din" noResource="true"/>
+        <Property name="name" type="java.lang.String" value="entity.hin" noResource="true"/>
         <Property name="readonly" type="boolean" value="true"/>
       </Properties>
     </Component>

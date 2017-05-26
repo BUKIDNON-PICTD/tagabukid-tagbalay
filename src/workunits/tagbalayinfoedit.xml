@@ -21,7 +21,6 @@
             def title;
             
             public def execute() {
-            println query
                 return service.execute(query);
             }
         }

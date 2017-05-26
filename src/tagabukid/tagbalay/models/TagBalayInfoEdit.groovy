@@ -40,7 +40,7 @@ public abstract class TagBalayInfoEdit extends PageFlowController {
     def formPanel = [
         getCategory: { key->
             if(!key) return "";
-            def membername = entity.members.find{ it.hhmid == key }?.name    
+            def membername = entity.members.find{ it.memberid == key }?.name    
             return ((membername) ? membername : key);
         },
         updateBean: {name,value,item->
@@ -52,8 +52,8 @@ public abstract class TagBalayInfoEdit extends PageFlowController {
     ] as FormPanelModel;
 
     def sortInfos(sinfos) {
-        def list = sinfos.findAll{it.hhm?.objid==null && it.attribute.category==null}?.sort{it.attribute.sortorder};
-        def catGrp = sinfos.findAll{it.hhm?.objid==null && it.attribute.category!=null};
+        def list = sinfos.findAll{it.member?.objid==null && it.attribute.category==null}?.sort{it.attribute.sortorder};
+        def catGrp = sinfos.findAll{it.member?.objid==null && it.attribute.category!=null};
         if(catGrp) {
             def grpList = catGrp.groupBy{ it.attribute.category };
             grpList.each { k,v->
@@ -62,18 +62,18 @@ public abstract class TagBalayInfoEdit extends PageFlowController {
                 }
             }
         }
-        list = list + sinfos.findAll{ it.hhm?.objid!=null }?.sort{ [it.hhm.name, it.attribute.sortorder] }; 
+        list = list + sinfos.findAll{ it.member?.objid!=null }?.sort{ [it.member.name, it.attribute.sortorder] }; 
         return list; 
     }
 
     def findValue( info ) {
-        if(info.hhm?.objid!=null) {
-            def filter = existingInfos.findAll{ it.hhm?.objid!=null };
-            def m = filter.find{ it.hhm.objid==info.hhm.objid && it.attribute.objid == info.attribute.objid };
+        if(info.member?.objid!=null) {
+            def filter = existingInfos.findAll{ it.member?.objid!=null };
+            def m = filter.find{ it.member.objid==info.member.objid && it.attribute.objid == info.attribute.objid };
             if(m) return m.value;
         }
         else {
-            def filter = existingInfos.findAll{ it.hhm?.objid==null };
+            def filter = existingInfos.findAll{ it.member?.objid==null };
             def m = filter.find{ it.attribute.objid == info.attribute.objid };
             if(m) return m.value;
         }
@@ -87,7 +87,7 @@ public abstract class TagBalayInfoEdit extends PageFlowController {
             def i = [
                 type:x.attribute.datatype, 
                 caption:x.attribute.caption, 
-                categoryid:  ((x.hhm?.objid!=null) ? x.hhm.objid : x.attribute.category),
+                categoryid:  ((x.member?.objid!=null) ? x.member.objid : x.attribute.category),
                 handler: x.attribute.handler,
                 name:x.attribute.name, 
                 bean: x,

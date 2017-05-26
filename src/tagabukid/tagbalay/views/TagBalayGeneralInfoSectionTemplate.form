@@ -73,7 +73,7 @@
                     <PropertyBean type="com.rameses.rcp.control.border.XLineBorder"/>
                 </Property>
                 <Property name="caption" type="java.lang.String" value="Pangulo sa Pamilya"/>
-                <Property name="expression" type="java.lang.String" value="#{entity.pangulo.name}"/>
+                <Property name="expression" type="java.lang.String" value="#{entity.tagbalay.pangulo.name}"/>
                 <Property name="opaque" type="boolean" value="true"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[0, 16]"/>
@@ -131,7 +131,7 @@
                     <PropertyBean type="com.rameses.rcp.control.border.XLineBorder"/>
                 </Property>
                 <Property name="caption" type="java.lang.String" value="Petsa sa Pagpangutana"/>
-                <Property name="expression" type="java.lang.String" value="#{entity.dtfiled}"/>
+                <Property name="expression" type="java.lang.String" value="#{entity.surveydate}"/>
                 <Property name="for" type="java.lang.String" value=""/>
                 <Property name="opaque" type="boolean" value="true"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -145,13 +145,13 @@
                     <PropertyBean type="com.rameses.rcp.control.border.XLineBorder"/>
                 </Property>
                 <Property name="caption" type="java.lang.String" value="Petsa sa Pag-encode"/>
+                <Property name="expression" type="java.lang.String" value="#{entity.recordlog.datecreated}"/>
                 <Property name="for" type="java.lang.String" value=""/>
                 <Property name="name" type="java.lang.String" value="" noResource="true"/>
                 <Property name="opaque" type="boolean" value="true"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[300, 16]"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="#{entity.recordlog.dtcreated}"/>
               </Properties>
             </Component>
             <Component class="com.rameses.rcp.control.XLabel" name="xLabel8">

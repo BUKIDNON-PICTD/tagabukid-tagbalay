@@ -21,6 +21,9 @@ public class TagabukidNewTagBalayController extends PageFlowController {
     @Service('PersistenceService')
     def persistenceSvc; 
     
+    @Service('UserRoleService')
+    def userroleSvc
+    
     @Service('LOVService')
     def lovService;
     
@@ -55,8 +58,9 @@ public class TagabukidNewTagBalayController extends PageFlowController {
     
     def initTagBalayAddress(){
         entity.tagbalay.address = null;
+        entity.text = null;
         if(entity.copyAddress){
-            entity.tagbalay.address = entity.pangulo.address;
+            entity.tagbalay.address = entity.tagbalay.pangulo.address;
         }
     }
     
@@ -71,12 +75,13 @@ public class TagabukidNewTagBalayController extends PageFlowController {
         else {
             throw new Exception("Please specify an address");
         }
-        entity.tagbalay.address = entity.tagbalay.address;
+//        entity.tagbalay.address = entity.tagbalay.address;
         entity.tagbalay.address.completed = true;
+       
     }
 
     void check() {
-        searchList  = verifySvc.getList(entity.pangulo.name); 
+        searchList  = verifySvc.getList(entity.tagbalay.pangulo.name); 
         if(searchList) {
             pass = false;
             verificationListModel.reload();
@@ -85,14 +90,6 @@ public class TagabukidNewTagBalayController extends PageFlowController {
             pass = true;
         }
     }
-    
-    //    void checkhin() {
-    //        def dininv = service.verifydin(entity.hin); 
-    //        entity.hin = dininv.hin
-    //        entity.dininventoryid = dininv.inv.objid
-    //        binding.refresh('entity.hin');
-    //        pass = true
-    //    }
 
     def verificationListModel = [
         fetchList: { o-> return searchList;}
@@ -105,62 +102,14 @@ public class TagabukidNewTagBalayController extends PageFlowController {
 
     void verify() {
         if( searchList.find{ it.weight == 100 } )
-        throw new Exception("Exact document title already exists. Please choose another document title");
+        throw new Exception("Exact Household exists.");
     }
             
     def save(){
+        //println entity.tagbalay
         entity = service.create(entity);
         return entity
     }
-            
-//    def attachmentListHandler = [
-//        fetchList : { return entity.attachments },
-//    ] as BasicListModel
-            
-    //    void loadAttachments(){
-    //        entity.attachments = [];
-    //        try{
-    //            entity.attachments = TagabukidDBImageUtil.getInstance().getImages(entity?.objid);
-    //        }
-    //        catch(e){
-    //            println 'Load Attachment error ============';
-    //            e.printStackTrace();
-    //        }
-    //        attachmentListHandler?.load();
-    //    }
-
-//    def addAttachment(){
-//        return InvokerUtil.lookupOpener('upload:attachment', [
-//                entity : entity,
-//                afterupload: {
-//                    loadAttachments();
-//                }
-//            ]);
-//    }
-//
-//    void deleteAttachment(){
-//        if (!attachmentSelectedItem) return;
-//        if (MsgBox.confirm('Delete selected Attachment?')){
-//            TagabukidDBImageUtil.getInstance().deleteImage(attachmentSelectedItem.objid);
-//            loadAttachments();
-//        }
-//    }
-
-
-//    def viewAttachment(){
-//        if (!attachmentSelectedItem) return null;
-//
-//        if (attachmentSelectedItem.extension.contains("pdf")){
-//            return InvokerUtil.lookupOpener('attachmentpdf:view', [
-//                    entity : attachmentSelectedItem,
-//                ]); 
-//        }else{
-//            return InvokerUtil.lookupOpener('attachment:view', [
-//                    entity : attachmentSelectedItem,
-//                ]); 
-//        }
-//
-//    }
             
     def print() {
         def op = Inv.lookupOpener( "dts:din", [entity: entity] );
@@ -181,7 +130,7 @@ public class TagabukidNewTagBalayController extends PageFlowController {
             } 
             if (colname == 'member') { 
                
-                if (entity.pangulo.objid ==  item.member.objid) throw new Exception('Dili pwede pilion ang PANGULO sa pamilya'); 
+                if (entity.tagbalay.pangulo.objid ==  item.member.objid) throw new Exception('Dili pwede pilion ang PANGULO sa pamilya'); 
             }
             if (colname == 'relation') {
                 if (item.relation == 'PANGULO') throw new Exception('Dili pwede nga duha ang PANGULO sa pamilya.'); 
@@ -189,7 +138,7 @@ public class TagabukidNewTagBalayController extends PageFlowController {
         },
         onAddItem: {item-> 
             item.objid = 'MEM'+new UID();
-            item.hhmid = item.member.objid;
+            item.memberid = item.member.objid;
             item.name = item.member.name;
             entity.members.add(item); 
         }, 
@@ -203,6 +152,14 @@ public class TagabukidNewTagBalayController extends PageFlowController {
     def getLookupMember() {
         return InvokerUtil.lookupOpener('entity:lookup', ['query.type': 'INDIVIDUAL','allowSelectEntityType' : false]); 
     }             
+    
+    List getSurveyors() {
+        def userlist = userroleSvc.getUsers([domain:'TAGBALAY', roles:'SURVEYOR'])
+        return userlist.collect{[ 
+            objid:it.objid, name:it.name, title:it.title, 
+            fullname: it.lastname +', '+ it.firstname +' '+ (it.middlename? it.middlename: '')  
+        ]}
+    }
     
     void updateInfo() {
         addpangulotomember();
@@ -224,19 +181,21 @@ public class TagabukidNewTagBalayController extends PageFlowController {
     //            throw new Exception("All lines of business must be specified. lobid is null");
     //    }
     void addpangulotomember(){
-        if(!entity.members.find{ it.relation == 'PANGULO' } ){
-            def schemaname = 'entity' + (entity.pangulo.type ? entity.pangulo.type :'').toLowerCase(); 
-            def o = [:];
-            o.member = persistenceSvc.read([ _schemaname: schemaname, objid: entity.pangulo.objid ]); 
-
-            o.objid = 'MEM'+new UID();
-            o.hhmid = o.member.objid;
-            o.name = o.member.name;
-            o.relation = 'PANGULO';
-            entity.members.add(o);
-            memberListHandler.reload();
+        def pangulo = entity.members.find{ it.relation == 'PANGULO' };
+        if(pangulo){
+            entity.members.remove(pangulo);
         }
-        
+         
+        def schemaname = 'entity' + (entity.tagbalay.pangulo.type ? entity.tagbalay.pangulo.type :'').toLowerCase(); 
+        def o = [:];
+        o.member = persistenceSvc.read([ _schemaname: schemaname, objid: entity.tagbalay.pangulo.objid ]); 
+
+        o.objid = 'MEM'+new UID();
+        o.memberid = o.member.objid;
+        o.name = o.member.name;
+        o.relation = 'PANGULO';
+        entity.members.add(o);
+        memberListHandler.reload();
         
     }
     public def addEntity() {

@@ -35,11 +35,11 @@ public class EditTagBalaySuccessPage extends javax.swing.JPanel {
         xLabel1 = new com.rameses.rcp.control.XLabel();
         xTextField1 = new com.rameses.rcp.control.XTextField();
 
+        xLabel1.setExpression("Survey successfully created. Please use the ff. identification no. for tracking purposes.");
         xLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        xLabel1.setText("Document successfully created. Please use the ff. identification no. for tracking purposes.");
 
         xTextField1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        xTextField1.setName("entity.din"); // NOI18N
+        xTextField1.setName("entity.hin"); // NOI18N
         xTextField1.setReadonly(true);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

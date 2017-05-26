@@ -17,8 +17,9 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="addressComponent1" min="-2" pref="601" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="66" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="entityAddress1" min="-2" pref="590" max="-2" attributes="0"/>
+              <EmptySpace pref="67" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -26,20 +27,15 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="addressComponent1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="420" max="32767" attributes="0"/>
+              <Component id="entityAddress1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="461" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="com.rameses.enterprise.views.AddressComponent" name="addressComponent1">
+    <Component class="com.rameses.enterprise.components.EntityAddress" name="entityAddress1">
       <Properties>
-        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder title="Nahimutangan sa Panimalay"/>
-          </Border>
-        </Property>
         <Property name="name" type="java.lang.String" value="entity.tagbalay.address" noResource="true"/>
       </Properties>
     </Component>

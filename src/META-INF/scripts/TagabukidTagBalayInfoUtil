@@ -31,7 +31,7 @@ public class TagabukidTagBalayInfoUtil {
             entity: e,
             existingInfos: entity.tagbalayinfos,
             handler:{ result ->
-                println result.infos
+                
                 entity.tagbalayinfos = result.infos;
                 listModel.reload();
                 if(handler) handler();

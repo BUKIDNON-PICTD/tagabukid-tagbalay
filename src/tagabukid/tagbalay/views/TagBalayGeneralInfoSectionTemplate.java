@@ -67,7 +67,7 @@ public class TagBalayGeneralInfoSectionTemplate extends javax.swing.JPanel {
 
         xLabel2.setBorder(new com.rameses.rcp.control.border.XLineBorder());
         xLabel2.setCaption("Pangulo sa Pamilya");
-        xLabel2.setExpression("#{entity.pangulo.name}");
+        xLabel2.setExpression("#{entity.tagbalay.pangulo.name}");
         xLabel2.setOpaque(true);
         xLabel2.setPreferredSize(new java.awt.Dimension(0, 16));
         xFormPanel1.add(xLabel2);
@@ -96,7 +96,7 @@ public class TagBalayGeneralInfoSectionTemplate extends javax.swing.JPanel {
 
         xLabel4.setBorder(new com.rameses.rcp.control.border.XLineBorder());
         xLabel4.setCaption("Petsa sa Pagpangutana");
-        xLabel4.setExpression("#{entity.dtfiled}");
+        xLabel4.setExpression("#{entity.surveydate}");
         xLabel4.setFor("");
         xLabel4.setOpaque(true);
         xLabel4.setPreferredSize(new java.awt.Dimension(300, 16));
@@ -104,11 +104,11 @@ public class TagBalayGeneralInfoSectionTemplate extends javax.swing.JPanel {
 
         xLabel7.setBorder(new com.rameses.rcp.control.border.XLineBorder());
         xLabel7.setCaption("Petsa sa Pag-encode");
+        xLabel7.setExpression("#{entity.recordlog.datecreated}");
         xLabel7.setFor("");
         xLabel7.setName(""); // NOI18N
         xLabel7.setOpaque(true);
         xLabel7.setPreferredSize(new java.awt.Dimension(300, 16));
-        xLabel7.setText("#{entity.recordlog.dtcreated}");
         xFormPanel2.add(xLabel7);
 
         xLabel8.setBorder(new com.rameses.rcp.control.border.XLineBorder());
