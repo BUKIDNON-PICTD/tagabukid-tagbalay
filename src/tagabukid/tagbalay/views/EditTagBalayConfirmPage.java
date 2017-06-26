@@ -39,7 +39,7 @@ public class EditTagBalayConfirmPage extends javax.swing.JPanel {
         xDataTable3.setBorder(xTitledBorder1);
         xDataTable3.setColumns(new com.rameses.rcp.common.Column[]{
             new com.rameses.rcp.common.Column(new Object[]{
-                new Object[]{"name", "hhm.name"}
+                new Object[]{"name", "member.name"}
                 , new Object[]{"caption", "Miyembro sa panimalay"}
                 , new Object[]{"width", 100}
                 , new Object[]{"minWidth", 0}
@@ -79,7 +79,6 @@ public class EditTagBalayConfirmPage extends javax.swing.JPanel {
             })
         });
         xDataTable3.setHandler("tagbalayinfo.listModel");
-        xDataTable3.setId("tagbalayinfo.listModel");
 
         com.rameses.rcp.control.border.XTitledBorder xTitledBorder2 = new com.rameses.rcp.control.border.XTitledBorder();
         xTitledBorder2.setTitle("Unsa ang mga ngalan sa mga miyembro sa pamilya?");

@@ -1,0 +1,41 @@
+<workunit>
+    <invokers>
+       <invoker type="tagbalay:naawala" action="init" />
+    </invokers>
+    <code>
+        <![CDATA[
+            import com.rameses.rcp.common.*
+            import com.rameses.rcp.annotations.*
+            import com.rameses.osiris2.client.*
+            import com.rameses.osiris2.common.*
+            import com.rameses.rulemgmt.constraint.*;
+            import com.rameses.rulemgmt.*;
+            import java.rmi.server.*;
+            
+            class TagbalayNaaWalaInfoController  {
+            
+                @Binding
+                def binding;
+                
+                def item;
+                 def tag;
+                void init() {
+                    if(item.value == null ) {
+                        item.value = false;
+                        if( item.defaultvalue ) {
+                            try {
+                                item.value = Boolean.parseBoolean(item.defaultvalue+"");
+                            }
+                            catch(e) {;}
+                        }
+                    }    
+                }
+               
+                
+            }
+        ]]>    
+    </code>
+    <pages>
+        <page template="tagabukid.tagbalay.views.TagbalayNaaWalaHandler" />
+    </pages>
+</workunit>

@@ -1,6 +1,6 @@
 <workunit>
     <invokers>
-        <invoker folderid="/explorer/txn/isstransaction" caption="New TagBalay"  action="start" target="window" index="1" />
+        <invoker folderid="/explorer/txn/tagbalaytranscation" caption="New TagBalay"  action="start" target="window" index="1" />
         <!--<invoker folderid="/home/tagbalay/tagbalay" caption="New TagBalay"  action="start" target="window" index="1" />-->
         <invoker folderid="/home/tagbalay" caption="New TagBalay"  action="start" target="window" index="1" />
         <invoker type="extActions" caption="Print"  icon="images/toolbars/printer.png" 
@@ -40,7 +40,7 @@
             <transition to="edit-members" caption="Next" name="next" mnemonic="N"/>
         </page>
         
-        <page name="edit-members" title="Household Members Information">
+        <page name="edit-members" title="Household Members Information" action="addpangulotomember">
             <transition to="edit-contact" caption="Back" mnemonic="B" name="back" />
             <transition to="confirm" caption="Next" name="next" mnemonic="N" action="updateInfo" />
         </page>

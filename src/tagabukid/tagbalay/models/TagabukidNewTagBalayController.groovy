@@ -6,9 +6,15 @@ import java.rmi.server.*;
 import com.rameses.gov.etracs.bpls.controller.*;
 import com.rameses.util.*;
 import tagabukid.utils.*;
-        
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 public class TagabukidNewTagBalayController extends PageFlowController {
-            
+       
+    @Binding
+    def binding;
+    
     @Script("TagabukidTagBalayInfoUtil")
     def tagbalayinfo
     
@@ -47,20 +53,21 @@ public class TagabukidNewTagBalayController extends PageFlowController {
         entity.tagbalay.address = null;
         entity.text = null;
     }
-    def editAddress() {
-        def h = { o->
-            if (handler) handler(o);
-            entity.tagbalay.address = o;
-            binding.refresh();
-        }
-        return Inv.lookupOpener( "address:editor", [handler:h, entity:entity, tag: tag] );
-    }
+//    def editAddress() {
+//        def h = { o->
+//            if (handler) handler(o);
+//            entity.tagbalay.address = o;
+//            binding.refresh();
+//        }
+////        println entity
+//        return Inv.lookupOpener( "address:editor", [handler:h, entity:entity, tag: tag] );
+//    }
     
     def initTagBalayAddress(){
-        entity.tagbalay.address = null;
-        entity.text = null;
+        addressreset();
         if(entity.copyAddress){
             entity.tagbalay.address = entity.tagbalay.pangulo.address;
+            binding.refresh('entity.*');
         }
     }
     
@@ -137,20 +144,65 @@ public class TagabukidNewTagBalayController extends PageFlowController {
             }
         },
         onAddItem: {item-> 
+            def schemaname = 'entity' + (item.member.type ? item.member.type :'').toLowerCase(); 
+            item.member = persistenceSvc.read([ _schemaname: schemaname, objid: item.member.objid ]); 
+            
+            Calendar now = Calendar.getInstance();
+            Calendar birthDay = Calendar.getInstance();
+            birthDay.setTime(item.member.birthdate);
+            int year1 = now.get(Calendar.YEAR);
+            int year2 = birthDay.get(Calendar.YEAR);
+         
+            
             item.objid = 'MEM'+new UID();
             item.memberid = item.member.objid;
             item.name = item.member.name;
+            item.gender = item.member.gender;
+            item.age = year1-year2
             entity.members.add(item); 
         }, 
         onRemoveItem: {item-> 
+            if (item.relation == 'PANGULO') throw new Exception('Dili pwede i.delete ang pangulo.'); 
             if (!MsgBox.confirm('Are you sure you want to remove this item?')) return false;
             entity.members.remove(item); 
             return true;
         }
     ] as EditorListModel;
     
+     def pregnantcoupleListHandler = [
+        fetchList:{o-> 
+            if (!entity) return null; 
+            if (!entity.couples) entity.couples = [];
+            return entity.couples; 
+        },
+        onColumnUpdate: {item,colname-> 
+//            if (colname == 'member') { 
+//                def o = entity.members.find{ it.member.objid == item.member.objid } 
+//                if (o) throw new Exception('This member already exist in the list. Please select another one.'); 
+//            } 
+//            if (colname == 'member') { 
+//               
+//                if (entity.tagbalay.pangulo.objid ==  item.member.objid) throw new Exception('Dili pwede pilion ang PANGULO sa pamilya'); 
+//            }
+//            if (colname == 'relation') {
+//                if (item.relation == 'PANGULO') throw new Exception('Dili pwede nga duha ang PANGULO sa pamilya.'); 
+//            }
+        },
+        onAddItem: {item-> 
+            item.objid = 'COUP'+new UID();
+            item.coupleid = item.objid;
+            item.name = item.name;
+            entity.couples.add(item); 
+        }, 
+        onRemoveItem: {item-> 
+            if (!MsgBox.confirm('Are you sure you want to remove this item?')) return false;
+            entity.couples.remove(item); 
+            return true;
+        }
+    ] as EditorListModel;
+    
     def getLookupMember() {
-        return InvokerUtil.lookupOpener('entity:lookup', ['query.type': 'INDIVIDUAL','allowSelectEntityType' : false]); 
+        return InvokerUtil.lookupOpener('individualentitywide:lookup'); 
     }             
     
     List getSurveyors() {
@@ -162,7 +214,8 @@ public class TagabukidNewTagBalayController extends PageFlowController {
     }
     
     void updateInfo() {
-        addpangulotomember();
+        //println entity.couples
+        //addpangulotomember();
         //if requierd na may at least 1 member ang tagbalay
         //membersverify();
         boolean test = false;
@@ -180,6 +233,7 @@ public class TagabukidNewTagBalayController extends PageFlowController {
     //        if(items.find{!it.lobid})
     //            throw new Exception("All lines of business must be specified. lobid is null");
     //    }
+    
     void addpangulotomember(){
         def pangulo = entity.members.find{ it.relation == 'PANGULO' };
         if(pangulo){
@@ -189,10 +243,19 @@ public class TagabukidNewTagBalayController extends PageFlowController {
         def schemaname = 'entity' + (entity.tagbalay.pangulo.type ? entity.tagbalay.pangulo.type :'').toLowerCase(); 
         def o = [:];
         o.member = persistenceSvc.read([ _schemaname: schemaname, objid: entity.tagbalay.pangulo.objid ]); 
+          
+        Calendar now = Calendar.getInstance();
+        Calendar birthDay = Calendar.getInstance();
+        birthDay.setTime(o.member.birthdate);
+        
+        int year1 = now.get(Calendar.YEAR);
+        int year2 = birthDay.get(Calendar.YEAR);
 
         o.objid = 'MEM'+new UID();
         o.memberid = o.member.objid;
         o.name = o.member.name;
+        o.gender = o.member.gender;
+        o.age = year1-year2
         o.relation = 'PANGULO';
         entity.members.add(o);
         memberListHandler.reload();

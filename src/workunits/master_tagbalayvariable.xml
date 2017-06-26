@@ -15,7 +15,7 @@
             String entityName = 'tagbalay_variable'
             String prefixId = 'HV'
             def arrayvalue
-            def datatypes = LOV.VAR_DATA_TYPES
+            def datatypes = LOV.TAGBALAY_VAR_DATA_TYPES;
             def vartype = 'USER-DEFINED';
 
             @PropertyChangeListener

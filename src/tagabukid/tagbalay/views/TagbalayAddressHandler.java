@@ -5,22 +5,16 @@
  */
 package tagabukid.tagbalay.views;
 
-
-import com.rameses.rcp.ui.annotations.StyleSheet;
-import com.rameses.rcp.ui.annotations.Template;
-
 /**
  *
  * @author rufino
  */
-@Template({TagBalayGeneralInfoSectionTemplate.class})
-@StyleSheet
-public class EditTagBalayAddressPage extends javax.swing.JPanel {
+public class TagbalayAddressHandler extends javax.swing.JPanel {
 
     /**
-     * Creates new form EditDocumentAttachmentPage
+     * Creates new form TagbalayBooleanHandler
      */
-    public EditTagBalayAddressPage() {
+    public TagbalayAddressHandler() {
         initComponents();
     }
 
@@ -33,30 +27,24 @@ public class EditTagBalayAddressPage extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        entityAddress1 = new com.rameses.enterprise.components.EntityAddress();
+        addressComponent1 = new com.rameses.enterprise.views.AddressComponent();
 
-        entityAddress1.setName("entity.tagbalay.address"); // NOI18N
+        addressComponent1.setName("entity.text"); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(entityAddress1, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(42, Short.MAX_VALUE))
+            .addComponent(addressComponent1, javax.swing.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(entityAddress1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(86, Short.MAX_VALUE))
+            .addComponent(addressComponent1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.rameses.enterprise.components.EntityAddress entityAddress1;
+    private com.rameses.enterprise.views.AddressComponent addressComponent1;
     // End of variables declaration//GEN-END:variables
 }

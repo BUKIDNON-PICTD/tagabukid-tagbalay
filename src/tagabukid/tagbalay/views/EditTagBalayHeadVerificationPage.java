@@ -41,23 +41,27 @@ public class EditTagBalayHeadVerificationPage extends javax.swing.JPanel {
         xFormPanel1.setCaptionWidth(100);
 
         xLabel1.setBorder(new com.rameses.rcp.control.border.XLineBorder());
-        xLabel1.setCaption("Document Title");
-        xLabel1.setExpression("#{entity.title}");
+        xLabel1.setCaption("Pangalan sa Pangulo sa Pamilya");
+        xLabel1.setCaptionWidth(180);
+        xLabel1.setExpression("#{entity.tagbalay.pangulo.name}");
         xLabel1.setPreferredSize(new java.awt.Dimension(500, 16));
         xFormPanel1.add(xLabel1);
 
         xLabel2.setBorder(new com.rameses.rcp.control.border.XLineBorder());
-        xLabel2.setCaption("Document Author");
-        xLabel2.setExpression("#{entity.author}");
+        xLabel2.setCaption("Nahimutangan sa panimalay");
+        xLabel2.setCaptionFontStyle("");
+        xLabel2.setCaptionWidth(180);
+        xLabel2.setExpression("#{entity.tagbalay.address.text}");
         xLabel2.setPreferredSize(new java.awt.Dimension(500, 16));
         xFormPanel1.add(xLabel2);
 
-        jLabel1.setText("The system has detected similar title that already exist in the database. If there is a positive match, please report this to the DTS administrator otherwise ignore and click Next.");
+        jLabel1.setText("Adunay kapariha nga pangalan sa pangulo sa panimalay nga naa sa database.");
+        jLabel1.setToolTipText("");
 
         xDataTable1.setColumns(new com.rameses.rcp.common.Column[]{
             new com.rameses.rcp.common.Column(new Object[]{
-                new Object[]{"name", "title"}
-                , new Object[]{"caption", "Title"}
+                new Object[]{"name", "name"}
+                , new Object[]{"caption", "Name"}
                 , new Object[]{"width", 100}
                 , new Object[]{"minWidth", 0}
                 , new Object[]{"maxWidth", 0}
@@ -69,8 +73,8 @@ public class EditTagBalayHeadVerificationPage extends javax.swing.JPanel {
                 , new Object[]{"typeHandler", new com.rameses.rcp.common.TextColumnHandler()}
             }),
             new com.rameses.rcp.common.Column(new Object[]{
-                new Object[]{"name", "author"}
-                , new Object[]{"caption", "Author"}
+                new Object[]{"name", "address"}
+                , new Object[]{"caption", "Address"}
                 , new Object[]{"width", 100}
                 , new Object[]{"minWidth", 0}
                 , new Object[]{"maxWidth", 0}
@@ -82,8 +86,21 @@ public class EditTagBalayHeadVerificationPage extends javax.swing.JPanel {
                 , new Object[]{"typeHandler", new com.rameses.rcp.common.TextColumnHandler()}
             }),
             new com.rameses.rcp.common.Column(new Object[]{
-                new Object[]{"name", "description"}
-                , new Object[]{"caption", "Description"}
+                new Object[]{"name", "hin"}
+                , new Object[]{"caption", "HIN"}
+                , new Object[]{"width", 100}
+                , new Object[]{"minWidth", 0}
+                , new Object[]{"maxWidth", 0}
+                , new Object[]{"required", false}
+                , new Object[]{"resizable", true}
+                , new Object[]{"nullWhenEmpty", true}
+                , new Object[]{"editable", false}
+                , new Object[]{"textCase", com.rameses.rcp.constant.TextCase.NONE}
+                , new Object[]{"typeHandler", new com.rameses.rcp.common.TextColumnHandler()}
+            }),
+            new com.rameses.rcp.common.Column(new Object[]{
+                new Object[]{"name", "surveydate"}
+                , new Object[]{"caption", "Survey Date"}
                 , new Object[]{"width", 100}
                 , new Object[]{"minWidth", 0}
                 , new Object[]{"maxWidth", 0}

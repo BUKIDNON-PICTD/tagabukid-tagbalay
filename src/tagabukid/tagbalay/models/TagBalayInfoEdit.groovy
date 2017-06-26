@@ -41,6 +41,10 @@ public abstract class TagBalayInfoEdit extends PageFlowController {
         getCategory: { key->
             if(!key) return "";
             def membername = entity.members.find{ it.memberid == key }?.name    
+//            def couplename = entity?.couples.collect{
+//                [name:(it.male != null ? it.male + ' & ' + it.female : it.female),coupleid:it.coupleid]
+//            }.find{ it.coupleid == key }.name
+//            def catname  = (couplename != null ? couplename : membername) 
             return ((membername) ? membername : key);
         },
         updateBean: {name,value,item->
@@ -52,8 +56,8 @@ public abstract class TagBalayInfoEdit extends PageFlowController {
     ] as FormPanelModel;
 
     def sortInfos(sinfos) {
-        def list = sinfos.findAll{it.member?.objid==null && it.attribute.category==null}?.sort{it.attribute.sortorder};
-        def catGrp = sinfos.findAll{it.member?.objid==null && it.attribute.category!=null};
+        def list = sinfos.findAll{it.member?.objid==null && it.couple?.objid==null && it.attribute.category==null}?.sort{it.attribute.sortorder};
+        def catGrp = sinfos.findAll{it.member?.objid==null && it.couple?.objid==null && it.attribute.category!=null};
         if(catGrp) {
             def grpList = catGrp.groupBy{ it.attribute.category };
             grpList.each { k,v->
@@ -62,18 +66,18 @@ public abstract class TagBalayInfoEdit extends PageFlowController {
                 }
             }
         }
-        list = list + sinfos.findAll{ it.member?.objid!=null }?.sort{ [it.member.name, it.attribute.sortorder] }; 
+        list = list + sinfos.findAll{ it.member?.objid!=null}?.sort{ [it.member?.name,it.attribute.sortorder] }; 
         return list; 
     }
 
     def findValue( info ) {
-        if(info.member?.objid!=null) {
-            def filter = existingInfos.findAll{ it.member?.objid!=null };
-            def m = filter.find{ it.member.objid==info.member.objid && it.attribute.objid == info.attribute.objid };
+        if(info.member?.objid!=null || info.couple?.objid!=null) {
+            def filter = existingInfos.findAll{ (it.member?.objid!=null) };
+            def m = filter.find{ (it.member.objid==info.member.objid) && it.attribute.objid == info.attribute.objid };
             if(m) return m.value;
         }
         else {
-            def filter = existingInfos.findAll{ it.member?.objid==null };
+            def filter = existingInfos.findAll{ (it.member?.objid==null) };
             def m = filter.find{ it.attribute.objid == info.attribute.objid };
             if(m) return m.value;
         }
@@ -86,8 +90,9 @@ public abstract class TagBalayInfoEdit extends PageFlowController {
         infos.each {x->
             def i = [
                 type:x.attribute.datatype, 
-                caption:x.attribute.caption, 
-                categoryid:  ((x.member?.objid!=null) ? x.member.objid : x.attribute.category),
+                caption:x.attribute.caption,
+                captionWidth:400,
+                categoryid:  ((x.member?.objid != null) ? x.member.objid : ((x.couple?.objid != null) ? x.couple.objid : x.attribute.category) ),
                 handler: x.attribute.handler,
                 name:x.attribute.name, 
                 bean: x,
@@ -99,7 +104,17 @@ public abstract class TagBalayInfoEdit extends PageFlowController {
             if(x.datatype.indexOf("_")>0) {
                 x.datatype = x.datatype.substring(0, x.datatype.indexOf("_"));
             }
-            if(i.type == "boolean") {
+            if(i.type == "oodili") {
+                i.type = "subform";
+                i.handler = "tagbalay:oodili";
+                i.properties = [item:x];
+            }
+            else if(i.type == "naawala") {
+                i.type = "subform";
+                i.handler = "tagbalay:naawala";
+                i.properties = [item:x];
+            }
+            else if(i.type == "boolean") {
                 i.type = "subform";
                 i.handler = "business_application:yesno";
                 i.properties = [item:x];
@@ -118,7 +133,9 @@ public abstract class TagBalayInfoEdit extends PageFlowController {
             else if( i.type == "info") {
                 i.type = "subform";
                 i.properties = [item:i.bean];
-                i.showCaption = false;
+//                i.properties = [item:x];
+//                i.handler = "tagbalay:address"
+                i.showCaption = true;
             }
             formInfos << i;
         }
@@ -127,9 +144,10 @@ public abstract class TagBalayInfoEdit extends PageFlowController {
      public void loadInfos() {
         infos.clear();
         def result = execute();
-        title = result.title;
-        //phase 0 is the looping phase.  
-        if( result.phase > 1 ) {
+//        title = result.title;
+       
+        //phase 0 is the looping phase. 
+        if( result.phase > 20 ) {
             query.infos.addAll(result.infos);
             if( !query.infos )
                 throw new Exception("There must be at least one value for infos");
