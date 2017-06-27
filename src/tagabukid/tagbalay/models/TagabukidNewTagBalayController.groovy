@@ -160,6 +160,12 @@ public class TagabukidNewTagBalayController extends PageFlowController {
             item.gender = item.member.gender;
             item.age = year1-year2
             entity.members.add(item); 
+            println item.member
+            if (item.member.gender == "M"){
+                entity.membermale.add(item)
+            }else{
+                entity.memberfemale.add(item)
+            }
         }, 
         onRemoveItem: {item-> 
             if (item.relation == 'PANGULO') throw new Exception('Dili pwede i.delete ang pangulo.'); 
@@ -258,6 +264,11 @@ public class TagabukidNewTagBalayController extends PageFlowController {
         o.age = year1-year2
         o.relation = 'PANGULO';
         entity.members.add(o);
+        if (o.member.gender == "M"){
+            entity.membermale.add(o)
+        }else{
+            entity.memberfemale.add(o)
+        }
         memberListHandler.reload();
         
     }

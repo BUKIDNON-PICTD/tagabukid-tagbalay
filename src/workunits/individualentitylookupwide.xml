@@ -1,11 +1,11 @@
 <workunit extends="com/rameses/seti2/templates/CrudLookup.xml" 
           schemaName="entityindividual" allowCreate="true">
    <invokers>
-       <invoker type="entityindividual:lookup" caption="Lookup Individual Entity" 
+       <invoker type="individualentitywide:lookup" caption="Lookup Individual Entity" 
                   action="init" target="popup" height="400" width="700"
                   cols="entityno,name,entityname,address.text,gender,type"/>
        
-       <invoker type="individualentity:lookup" caption="Lookup Individual Entity" 
+       <invoker type="individualentitywide:lookup" caption="Lookup Individual Entity" 
                   action="init" target="popup" height="400" width="700"
                   cols="entityno,name,entityname,address.text,gender,type"/>
    </invokers>

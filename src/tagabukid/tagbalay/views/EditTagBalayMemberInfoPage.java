@@ -53,7 +53,7 @@ public class EditTagBalayMemberInfoPage extends javax.swing.JPanel {
                 , new Object[]{"editable", true}
                 , new Object[]{"editableWhen", null}
                 , new Object[]{"textCase", com.rameses.rcp.constant.TextCase.UPPER}
-                , new Object[]{"typeHandler", new com.rameses.rcp.common.ComboBoxColumnHandler("entity.members", "member.name", "#{item.member.name}")}
+                , new Object[]{"typeHandler", new com.rameses.rcp.common.ComboBoxColumnHandler("entity.membermale", "member.name", "#{item.member.name}")}
             }),
             new com.rameses.rcp.common.Column(new Object[]{
                 new Object[]{"name", "female"}
@@ -67,7 +67,7 @@ public class EditTagBalayMemberInfoPage extends javax.swing.JPanel {
                 , new Object[]{"editable", true}
                 , new Object[]{"editableWhen", null}
                 , new Object[]{"textCase", com.rameses.rcp.constant.TextCase.UPPER}
-                , new Object[]{"typeHandler", new com.rameses.rcp.common.ComboBoxColumnHandler("entity.members", "member.name", "#{item.member.name}")}
+                , new Object[]{"typeHandler", new com.rameses.rcp.common.ComboBoxColumnHandler("entity.memberfemale", "member.name", "#{item.member.name}")}
             })
         });
         xDataTable1.setHandler("pregnantcoupleListHandler");
