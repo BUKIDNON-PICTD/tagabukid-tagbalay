@@ -1,0 +1,13 @@
+<workunit schemaName="tagbalay">
+    <invokers>
+        <!--<invoker type="tagbalay:section:create" caption="Household Member Info" action="create" index="2" visibleWhen="#{true}"/>-->
+        <invoker type="tagbalay:section:open" caption="Household Member Info" action="init" index="2" visibleWhen="#{true}"/>
+    </invokers>
+    
+    <code class="tagabukid.tagbalay.models.TagbalayHouseholdMemberListController" />
+
+    <pages>
+        <page  template="tagabukid.tagbalay.views.TagbalayHouseholdMemberListPage"/>
+    </pages>
+    
+</workunit>

@@ -1,18 +1,22 @@
 <folders>
     <folder id="explorer">
         <folder id="txn">
-            <folder id="tagbalaytranscation" caption="Integrated Survey System" index="1"/>
+            <folder id="tagbalay" caption="TagBalay" index="1"/>
         </folder>
         <folder id="master">
-            <folder id="tagbalaymaster" caption="TagBalay Master" index="1"/>
+            <folder id="tagbalay" caption="TagBalay Master" index="1"/>
+        </folder>
+        <folder id="report">
+            <folder id="tagbalay" caption="TagBalay Reports" index="1">
+            </folder>
         </folder>
         <folder id="rulemgmt" caption="Rule Management">
-            <folder id="tagbalay" caption="TagBalay" index="5"/>
+            <folder id="tagbalay" caption="TagBalay Rule Management" index="5"/>
         </folder>  
     </folder> 
     <folder id="home">
-        <folder id="tagbalay" caption="TagBalay">
-            <folder id="household" caption="Household" index="4"/>
+        <folder id="tagbalay" caption="TagBalay" icon="home/icons/citizenmaster.png" >
+            <!--<folder id="household" caption="Household" index="4"/>-->
             <folder id="master" caption="Master File" index="5"/>
         </folder>
     </folder>
