@@ -64,6 +64,7 @@ class  TagbalayHouseholdMemberInfoController extends CrudFormModel{
     
     public void afterOpen() {
         entity.member = persistenceSvc.read([ _schemaname: 'entityindividual', objid: entity.member.objid ]); 
+        entity.member.age = 0
         Calendar now = Calendar.getInstance();
         Calendar birthDay = Calendar.getInstance();
         birthDay.setTime(entity.member.birthdate);

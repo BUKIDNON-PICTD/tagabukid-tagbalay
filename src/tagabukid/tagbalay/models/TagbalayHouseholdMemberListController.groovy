@@ -91,12 +91,12 @@ class  TagbalayHouseholdMemberListController{
                    it.member.entityname = it.member.name
                    if (!it.height) it.height = 0;
                    if (!it.weight) it.weight = 0;
-                   Calendar now = Calendar.getInstance();
-                   Calendar birthDay = Calendar.getInstance();
-                   birthDay.setTime(it.member.birthdate);
-                   int year1 = now.get(Calendar.YEAR);
-                   int year2 = birthDay.get(Calendar.YEAR);
-                   it.member.age = year1-year2
+                    Calendar now = Calendar.getInstance();
+                    Calendar birthDay = Calendar.getInstance();
+                    birthDay.setTime(it.member.birthdate);
+                    int year1 = now.get(Calendar.YEAR);
+                    int year2 = birthDay.get(Calendar.YEAR);
+                    it.member.age = year1-year2
             }
             return entity?.activemembers
         },
@@ -125,19 +125,18 @@ class  TagbalayHouseholdMemberListController{
             def schemaname = 'entityindividual'; 
             item.member = persistenceSvc.read([ _schemaname: schemaname, objid: item.member.objid ]); 
             
-            Calendar now = Calendar.getInstance();
-            Calendar birthDay = Calendar.getInstance();
-            birthDay.setTime(item.member.birthdate);
-            int year1 = now.get(Calendar.YEAR);
-            int year2 = birthDay.get(Calendar.YEAR);
-            
-            
+            if (item.member.birthdate){
+                Calendar now = Calendar.getInstance();
+                Calendar birthDay = Calendar.getInstance();
+                birthDay.setTime(item.member.birthdate);
+                int year1 = now.get(Calendar.YEAR);
+                int year2 = birthDay.get(Calendar.YEAR);
+                item.member.age = year1-year2
+            }
 //            item.objid = 'MEM' + new UID();
 //            item.memberid = item.member.objid;
 //            item.name = item.member.name;
 //            item.gender = item.member.gender;
-            item.member.age = year1-year2
-            
             entity.activemembers.add(item); 
             item._schemaname = 'tagbalay_active_member'
             persistenceSvc.create(item);

@@ -39,7 +39,7 @@ class  TagbalayHouseholdInfoController extends CrudFormModel{
        
             if(!isCitizenExist()){
                 entity.tagbalay.address.text = svc.formatAddress(entity.tagbalay.address,"\n")
-                
+             
                 binding.refresh();
                 maincontroller.reloadphoto(entity.tagbalay);
             }else{
@@ -75,9 +75,26 @@ class  TagbalayHouseholdInfoController extends CrudFormModel{
     }
     public void beforeSave(o){
         if (o == 'create'){
+            binding.refresh();
+            def individual = persistenceSvc.read([ _schemaname: "entity"+entity.tagbalay.type.toLowerCase(), objid: entity.tagbalay.objid]).findAll{it.value!=null};
+            def tagbalay = entity.tagbalay;
+         
+            if (!individual.middlename) throw new Exception('Middlename is required');
             
+            entity.tagbalay = tagbalay + individual;
             entity.hin = svc.getHIN(entity);
             entity.activeaddress[0] = entity.tagbalay.address;
+            entity.activemembers[0] = [
+                objid: 'MEM' + new java.rmi.server.UID(),
+                parentid: entity.objid,
+                member : entity.tagbalay,
+                height : entity.height,
+                weight : entity.weight,
+                relation: 'PANGULO'
+                
+            ]
+            
+            
 //            def newsurvey = svc.initSurvey(entity);
 //            entity.surveys[0] = newsurvey
         }
@@ -89,8 +106,7 @@ class  TagbalayHouseholdInfoController extends CrudFormModel{
     }
     public void afterSave(){
   
-        entity.tagbalay._schemaname = "entity"+entity.tagbalay.type.toLowerCase()
-        // entity.tagbalay.putAll(persistenceSvc.read([ _schemaname: 'hrmis_pds', objid: entity.tagbalay.objid])) 
+        entity.tagbalay._schemaname = "entity"+entity.tagbalay.type.toLowerCase();
         persistenceSvc.update(entity.tagbalay);
         maincontroller.entity = entity
         maincontroller.reloadSections('open');
