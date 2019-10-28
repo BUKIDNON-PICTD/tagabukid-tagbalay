@@ -2,7 +2,7 @@
 schemaName="tagbalay"
 cols="hin,tagbalay.name,tagbalay.birthdate,tagbalay.gender,activeaddress[0].text" allowDelete="false">
     <invokers>
-        <invoker folderid="/home/tagbalay" caption="TagBalay List" action="init" index="1" icon="home/icons/list.png"/>
-        <invoker folderid="/explorer/txn/tagbalay" caption="TagBalay List" action="init" index="1" />  
+        <invoker folderid="/home/tagbalay" caption="TagBalay List" action="init" index="1" icon="home/icons/list.png" role="SHARED"/>
+        <invoker folderid="/explorer/txn/tagbalay" caption="TagBalay List" action="init" index="1" role="SHARED"/>  
     </invokers>
 </workunit>

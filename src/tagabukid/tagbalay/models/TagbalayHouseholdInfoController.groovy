@@ -128,7 +128,7 @@ class  TagbalayHouseholdInfoController extends CrudFormModel{
     }
     
     List getSurveyors() {
-        def userlist = userroleSvc.getUsers([domain:'TAGBALAY', roles:'SURVEYOR'])
+        def userlist = userroleSvc.getUsers([domain:'TAGBALAY', roles:'ENCODER'])
         return userlist.collect{[ 
             objid:it.objid, name:it.name, title:it.title, 
             fullname: it.lastname +', '+ it.firstname +' '+ (it.middlename? it.middlename: '')  
