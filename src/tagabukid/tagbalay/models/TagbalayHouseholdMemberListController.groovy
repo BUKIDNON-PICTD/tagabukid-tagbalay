@@ -60,7 +60,6 @@ class  TagbalayHouseholdMemberListController{
     void init() {
      
         entity.putAll(parententity)
-        
         memberListHandler.load();
         currententity = entity
     }
@@ -70,18 +69,18 @@ class  TagbalayHouseholdMemberListController{
         return InvokerUtil.lookupOpener('tagbalay:member:open', [member: [objid:selectedMember.objid]]);
     }
     
-    public void beforeSave(o){
-       
-    }
-    public void afterSave(){
-        currententity = entity
-        
-        entity.activemembers.each{
-            it.member._schemaname = "entityindividual"
-            persistenceSvc.update(it.member)
-        }
-        memberListHandler.load();
-    }
+//    public void beforeSave(o){
+//       
+//    }
+//    public void afterSave(){
+//        currententity = entity
+//        
+//        entity.activemembers.each{
+//            it.member._schemaname = "entityindividual"
+//            persistenceSvc.update(it.member)
+//        }
+//        memberListHandler.load();
+//    }
     
    def memberListHandler = [
         fetchList:{
@@ -91,12 +90,12 @@ class  TagbalayHouseholdMemberListController{
                    it.member.entityname = it.member.name
                    if (!it.height) it.height = 0;
                    if (!it.weight) it.weight = 0;
-                    Calendar now = Calendar.getInstance();
-                    Calendar birthDay = Calendar.getInstance();
-                    birthDay.setTime(it.member.birthdate);
-                    int year1 = now.get(Calendar.YEAR);
-                    int year2 = birthDay.get(Calendar.YEAR);
-                    it.member.age = year1-year2
+//                    Calendar now = Calendar.getInstance();
+//                    Calendar birthDay = Calendar.getInstance();
+//                    birthDay.setTime(it.member.birthdate);
+//                    int year1 = now.get(Calendar.YEAR);
+//                    int year2 = birthDay.get(Calendar.YEAR);
+//                    it.member.age = year1-year2
             }
             return entity?.activemembers
         },
