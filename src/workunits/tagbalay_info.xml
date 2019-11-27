@@ -2,6 +2,7 @@
     <invokers>
         <invoker type="tagbalay:create" caption="Household Info" action="create" index="1" visibleWhen="#{true}"/>
         <invoker type="tagbalay:open" caption="Household Info" action="open" index="1" visibleWhen="#{true}"/>
+         <invoker type="global:barcode:ASMIS" caption="Household Info" action="open" target="window"/>
     </invokers>
     
     <code class="tagabukid.tagbalay.models.TagbalayInfoController" />

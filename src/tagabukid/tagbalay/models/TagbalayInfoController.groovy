@@ -21,10 +21,14 @@ class TagbalayInfoController{
  
     @FormTitle
     def title
+    
+    @Service('QueryService')
+    def querySvc
 
     def sections;
     def currentSection;
     def entity;
+    def barcodeid;
 
     public void beforeSave(o){
 //        if (o == 'create'){
@@ -70,6 +74,12 @@ class TagbalayInfoController{
         loadSections('create');
     }
     public void open(){
+//        entity = service.open( [barcodeid: barcodeid,taskid:entity?.taskid,objid:entity?.objid ] );
+        if(barcodeid){
+            def p = [_schemaname: 'tagbalay'];
+            p.findBy = [ 'hin':barcodeid];
+            entity =  querySvc.findFirst( p );
+        }
         title = entity.hin + " - " + entity.tagbalay.name
         entity = persistenceSvc.read([ _schemaname: 'tagbalay', objid: entity.objid])
         entity.tagbalay.putAll(persistenceSvc.read([ _schemaname: "entity"+entity.tagbalay.type.toLowerCase(), objid: entity.tagbalay.objid])) 
@@ -83,9 +93,10 @@ class TagbalayInfoController{
 //    }
     void reloadSections(action) {
 //        binding.refresh("subform");
-        title = entity.hin + " - " + entity.tagbalay.name
+       
         entity = persistenceSvc.read([ _schemaname: 'tagbalay', objid: entity.objid])
         entity.tagbalay.putAll(persistenceSvc.read([ _schemaname: "entity"+entity.tagbalay.type.toLowerCase(), objid: entity.tagbalay.objid])) 
+        title = entity.hin + " - " + entity.tagbalay.name
         def handlers = Inv.lookupOpeners("tagbalay:section:"+action,[parententity:entity,svc:svc]);
         def selitemid = currentSection?.id; 
         sections.clear();

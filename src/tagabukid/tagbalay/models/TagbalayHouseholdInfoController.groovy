@@ -93,10 +93,33 @@ class  TagbalayHouseholdInfoController extends CrudFormModel{
                 relation: 'PANGULO'
                 
             ]
+        }else if (o == 'update'){
+            def individual = persistenceSvc.read([ _schemaname: "entity"+entity.tagbalay.type.toLowerCase(), objid: entity.tagbalay.objid]).findAll{it.value!=null};
+            def tagbalay = entity.tagbalay;
             
+            if (!individual.middlename) throw new Exception('Middlename is required');
             
-//            def newsurvey = svc.initSurvey(entity);
-//            entity.surveys[0] = newsurvey
+            entity.tagbalay = tagbalay + individual;
+            
+            if(!(entity.activemembers.findAll{it.relation == 'PANGULO'}.collect{it.member.objid}).contains(entity.tagbalay.objid))
+            {   
+                entity.activemembers.findAll{it.relation == 'PANGULO'}.each{
+                    it._schemaname = 'tagbalay_active_member';
+                    persistenceSvc.removeEntity(it);
+                }
+                entity.activemembers.removeAll(entity.activemembers.findAll{it.relation == 'PANGULO'}); 
+                
+                def newhead = [
+                    objid: 'MEM' + new java.rmi.server.UID(),
+                    parentid: entity.objid,
+                    member : entity.tagbalay,
+                    height : entity.height,
+                    weight : entity.weight,
+                    relation: 'PANGULO'
+                ]
+                entity.activemembers.add(newhead);
+                println entity.activemembers;
+            }
         }
     }
     public void afterCreate(){
