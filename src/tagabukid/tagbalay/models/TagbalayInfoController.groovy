@@ -77,10 +77,10 @@ class TagbalayInfoController{
 //        entity = service.open( [barcodeid: barcodeid,taskid:entity?.taskid,objid:entity?.objid ] );
         if(barcodeid){
             def p = [_schemaname: 'tagbalay'];
-            p.findBy = [ 'hin':barcodeid];
+            p.findBy = [ 'controlno':barcodeid];
             entity =  querySvc.findFirst( p );
         }
-        title = entity.hin + " - " + entity.tagbalay.name
+        title = entity.controlno + " - " + entity.tagbalay.name
         entity = persistenceSvc.read([ _schemaname: 'tagbalay', objid: entity.objid])
         entity.tagbalay.putAll(persistenceSvc.read([ _schemaname: "entity"+entity.tagbalay.type.toLowerCase(), objid: entity.tagbalay.objid])) 
         loadSections('open');
@@ -96,7 +96,7 @@ class TagbalayInfoController{
        
         entity = persistenceSvc.read([ _schemaname: 'tagbalay', objid: entity.objid])
         entity.tagbalay.putAll(persistenceSvc.read([ _schemaname: "entity"+entity.tagbalay.type.toLowerCase(), objid: entity.tagbalay.objid])) 
-        title = entity.hin + " - " + entity.tagbalay.name
+        title = entity.controlno + " - " + entity.tagbalay.name
         def handlers = Inv.lookupOpeners("tagbalay:section:"+action,[parententity:entity,svc:svc]);
         def selitemid = currentSection?.id; 
         sections.clear();

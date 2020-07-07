@@ -14,10 +14,10 @@
             <folder id="tagbalay" caption="TagBalay Rule Management" index="5"/>
         </folder>  
     </folder> 
-    <folder id="home">
-        <folder id="tagbalay" caption="TagBalay" icon="home/icons/citizenmaster.png" >
-            <!--<folder id="household" caption="Household" index="4"/>-->
-            <folder id="master" caption="Master File" index="5"/>
+    <folder id="menucategory">
+        <folder id="tagbalay" caption="Citizen" icon="home/icons/citizenmaster.png">
+           <folder id="citizen" caption="Citizen Profile" index="1" icon="home/icons/masterfiles.png"/>
+           <folder id="master" caption="Master File" index="5" icon="home/icons/masterfiles.png"/>
         </folder>
     </folder>
 </folders>

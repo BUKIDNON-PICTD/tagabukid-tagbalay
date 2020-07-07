@@ -82,7 +82,7 @@ class  TagbalayHouseholdInfoController extends CrudFormModel{
             if (!individual.middlename) throw new Exception('Middlename is required');
             
             entity.tagbalay = tagbalay + individual;
-            entity.hin = svc.getHIN(entity);
+            entity.controlno = svc.getControlNo(entity);
             entity.activeaddress[0] = entity.tagbalay.address;
             entity.activemembers[0] = [
                 objid: 'MEM' + new java.rmi.server.UID(),
