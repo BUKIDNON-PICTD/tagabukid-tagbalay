@@ -1,0 +1,6 @@
+<workunit extends="com/rameses/seti2/templates/CrudLookup.xml" schemaName="tagbalay_variable" 
+          createAllowed="true">
+    <invokers>
+        <invoker type="tagbalayvariable:lookup" caption="Household Info" action="init" width="700" />
+    </invokers>
+</workunit>

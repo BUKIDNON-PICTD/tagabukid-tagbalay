@@ -1,0 +1,20 @@
+<workunit>
+    <invokers>
+        <invoker type="tagbalay:open" caption="Tagbalay Info" action="open" index="100" target="window"/>
+<!--        <invoker type="document_incoming:open" caption="Document Info" target="window" action="open"/>
+        <invoker type="document_outgoing:open" caption="Document Info" target="window" action="open"/>
+        <invoker type="global:barcode:71007" caption="Document Tracking System" action="open" target="window"
+            expr="#{!barcodeid.contains('-')}"/>-->
+        
+        <invoker type="formActions" caption="Close" action="_close" />
+        <!--<invoker type="formActions" caption="Edit" action="showEditMenu" icon="images/toolbars/edit.png"/>--> 
+        <!--<invoker type="formActions" caption="View Parent" action="showParent" immediate="true" visibleWhen="#{entity.parentid!=null}"/>--> 
+        <!--<invoker type="formActions" caption="Show Document Info" action="showDocInfo" immediate="true" visibleWhen="#{entity.docinfo!=null}"/>--> 
+        <!--<invoker type="formActions" caption="Send SMS" action="createSMS" immediate="true" />--> 
+        <!--<invoker type="subaycabinet-document:open" caption="Document Info" action="open" target="window"/>-->
+    </invokers>
+    <code class="tagabukid.tagbalay.models.TagbalayInfoController"/>
+    <pages>
+        <page template="tagabukid.tagbalay.views.TagbalayInfoPage"/>
+    </pages>
+</workunit>

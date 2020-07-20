@@ -1,0 +1,64 @@
+import com.rameses.rcp.annotations.*
+import com.rameses.rcp.common.*
+import com.rameses.osiris2.client.*
+import com.rameses.osiris2.common.*
+import java.rmi.server.*;
+import com.rameses.util.*;
+
+public class TagabukidTagBalayInfoUtil {
+     
+    @Caller
+    def caller;
+    def handler;
+
+    def getEntity() {
+        return caller.entity;
+    }
+
+
+    def listModel = [
+       fetchList: { o-> 
+            return entity.tagbalayinfos; 
+        }
+    ] as BasicListModel;
+
+    def update() {
+        def e = [:];
+        e.putAll( entity );
+       
+        if( !entity.tagbalayinfos ) entity.tagbalayinfos = [];
+        return InvokerUtil.lookupOpener("tagbalay:tagbalayinfos", [
+            entity: e,
+            existingInfos: entity.tagbalayinfos,
+            handler:{ result ->
+                
+                entity.tagbalayinfos = result.infos;
+                listModel.reload();
+                if(handler) handler();
+            }
+        ]);
+      
+    }
+    
+    def verify() {
+        if(!entity.tagbalayinfos) 
+            throw new Exception("Please specify at least one info for household");
+        def unedited = entity.tagbalayinfos.findAll{ it.value == null };
+        if( unedited ) {
+            def buff = new StringBuffer();
+            unedited.each {
+                buff.append( "\n"+it.attribute.name );
+            }
+            throw new Exception("Please complete the ff. Do not leave blanks" + buff.toString() );  
+        }    
+    }
+
+    void reset(){
+        listModel.reload();
+    }
+
+    void refresh(){
+        listModel.reload();
+    }
+    
+}

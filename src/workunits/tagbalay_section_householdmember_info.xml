@@ -1,0 +1,13 @@
+<workunit schemaName="tagbalay_active_member">
+    <invokers>
+        <!--<invoker folderid="/home/tagbalay" caption="TagBalay TEST" action="open" index="1" icon="home/icons/list.png"/>-->
+        <invoker type="tagbalay:member:open" caption="Household Member Info" action="open" index="2" visibleWhen="#{true}"/>
+    </invokers>
+    
+    <code class="tagabukid.tagbalay.models.TagbalayHouseholdMemberInfoController" />
+
+    <pages>
+        <page  template="tagabukid.tagbalay.views.TagbalayHouseholdMemberInfoPage"/>
+    </pages>
+    
+</workunit>

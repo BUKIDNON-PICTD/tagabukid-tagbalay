@@ -1,0 +1,8 @@
+<workunit extends="com/rameses/seti2/templates/CrudList.xml" 
+schemaName="tagbalay"
+cols="controlno,tagbalay.name,tagbalay.birthdate,tagbalay.gender,address" allowDelete="false">
+    <invokers>
+        <invoker folderid="/menucategory/tagbalay/citizen"  caption="Citizen List" action="init" index="1" icon="home/icons/list.png"/>
+        <invoker folderid="/explorer/txn/tagbalay" caption="Citizen List" action="init" index="1" role="SHARED"/>  
+    </invokers>
+</workunit>

@@ -1,0 +1,20 @@
+<workunit>
+    <invokers>
+        <invoker type="tagbalay:section" caption="Tagbalay Info" action="init" index="-100" />
+        
+        <!--<invoker type="extActions" caption="Open Child" action="showChild" visibleWhen="#{selectedItem!=null}"/>-->
+        <!--<invoker type="extActions" caption="Print DIN" action="print" />-->
+        <invoker type="formActions" caption="Modify" name="popupChangeInfo" index="1000" category="tagbalay:changeinfo"/>
+        <!--<invoker type="formActions" caption="Transfer" action="transferParent" index="1001" visibleWhen="#{entity.state == 'archived'}" role="SHARED"/>-->
+        
+
+    </invokers>
+    
+    <code class="tagabukid.tagbalay.models.TagbalayGeneralInfoSectionController" />
+
+    
+    <pages>
+        <page  template="tagabukid.tagbalay.views.TagBalayGeneralInfoEditPage"/>
+    </pages>
+    
+</workunit>

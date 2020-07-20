@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="xFormPanel1" min="-2" pref="616" max="-2" attributes="0"/>
+              <EmptySpace pref="56" max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="xFormPanel1" min="-2" pref="314" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Container class="com.rameses.rcp.control.XFormPanel" name="xFormPanel1">
+      <Properties>
+        <Property name="captionPadding" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+          <Insets value="[0, 5, 0, 5]"/>
+        </Property>
+        <Property name="captionWidth" type="int" value="180"/>
+      </Properties>
+      <SubComponents>
+        <Component class="com.rameses.rcp.control.XIntegerField" name="xIntegerField1">
+          <Properties>
+            <Property name="caption" type="java.lang.String" value="Tile No."/>
+            <Property name="name" type="java.lang.String" value="entity.tileno" noResource="true"/>
+            <Property name="required" type="boolean" value="true"/>
+          </Properties>
+        </Component>
+        <Component class="com.rameses.rcp.control.XDateField" name="xDateField2">
+          <Properties>
+            <Property name="caption" type="java.lang.String" value="Petsa sa Pagpangutana"/>
+            <Property name="name" type="java.lang.String" value="entity.surveydate" noResource="true"/>
+            <Property name="required" type="boolean" value="true"/>
+          </Properties>
+        </Component>
+        <Component class="com.rameses.rcp.control.XComboBox" name="xComboBox1">
+          <Properties>
+            <Property name="allowNull" type="boolean" value="false"/>
+            <Property name="caption" type="java.lang.String" value="Pangalan sa nag survey"/>
+            <Property name="expression" type="java.lang.String" value="#{item.name}"/>
+            <Property name="immediate" type="boolean" value="true"/>
+            <Property name="index" type="int" value="-100"/>
+            <Property name="items" type="java.lang.String" value="surveyors"/>
+            <Property name="name" type="java.lang.String" value="entity.survey.surveyor " noResource="true"/>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[300, 20]"/>
+            </Property>
+            <Property name="required" type="boolean" value="true"/>
+          </Properties>
+        </Component>
+        <Component class="com.rameses.entity.components.EntityLookup" name="entityLookup2">
+          <Properties>
+            <Property name="caption" type="java.lang.String" value="Pangalan sa Pangulo sa Pamilya"/>
+            <Property name="expression" type="java.lang.String" value="#{entity.name}"/>
+            <Property name="name" type="java.lang.String" value="entity.tagbalay.pangulo" noResource="true"/>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[0, 21]"/>
+            </Property>
+            <Property name="required" type="boolean" value="true"/>
+          </Properties>
+        </Component>
+        <Component class="com.rameses.enterprise.components.EntityAddress" name="entityAddress2">
+          <Properties>
+            <Property name="caption" type="java.lang.String" value="Nahimutangan sa Panimalay"/>
+            <Property name="name" type="java.lang.String" value="entity.tagbalay.address" noResource="true"/>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[0, 86]"/>
+            </Property>
+            <Property name="propertyInfo" type="com.rameses.rcp.common.PropertySupport$PropertyInfo" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="null"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="com.rameses.rcp.control.XTextField" name="xTextField1">
+          <Properties>
+            <Property name="caption" type="java.lang.String" value="Mobile/Cellphone No."/>
+            <Property name="name" type="java.lang.String" value="entity.mobileno" noResource="true"/>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[150, 20]"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="com.rameses.rcp.control.XTextField" name="xTextField2">
+          <Properties>
+            <Property name="caption" type="java.lang.String" value="Phone No."/>
+            <Property name="name" type="java.lang.String" value="entity.phoneno" noResource="true"/>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[150, 20]"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="com.rameses.rcp.control.XTextField" name="xTextField3">
+          <Properties>
+            <Property name="caption" type="java.lang.String" value="Email Address"/>
+            <Property name="name" type="java.lang.String" value="entity.email" noResource="true"/>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[150, 20]"/>
+            </Property>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+  </SubComponents>
+</Form>

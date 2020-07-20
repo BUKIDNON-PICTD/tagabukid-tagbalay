@@ -1,0 +1,54 @@
+<workunit>
+    <invokers>
+       <invoker type="tagbalay:address" action="init" />
+    </invokers>
+    <code>
+        <![CDATA[
+            import com.rameses.rcp.common.*
+            import com.rameses.rcp.annotations.*
+            import com.rameses.osiris2.client.*
+            import com.rameses.osiris2.common.*
+            import com.rameses.rulemgmt.constraint.*;
+            import com.rameses.rulemgmt.*;
+            import java.rmi.server.*;
+            
+            class TagbalayAddressController  {
+            
+                @Binding
+                def binding;
+                
+                def entity
+                def item;
+                def tag;
+                def handler;
+                
+                void init() {
+                   entity = item.value
+                   if(item.value == null ) {
+                        item.value = "";
+                        if( item.defaultvalue ) {
+                            try {
+                                item.value = item.defaultvalue+"";
+                            }
+                            catch(e) {;}
+                        }
+                    }    
+                }
+                 
+                def editAddress() {
+                    def h = { o->
+                        if (handler) handler(o);
+                        item.value = o;
+                        entity = o
+                        binding.refresh();
+                    }
+                    println "TEST"
+                    return Inv.lookupOpener( "address:editor", [handler:h, entity:[:], tag: tag] );
+                }
+            }
+        ]]>    
+    </code>
+    <pages>
+        <page template="tagabukid.tagbalay.views.TagbalayAddressHandler" />
+    </pages>
+</workunit>
