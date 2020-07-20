@@ -66,12 +66,18 @@ class  TagbalayHouseholdInfoController extends CrudFormModel{
     boolean isShowNavigation(){
         return false
     }
+    def isNotQualified = false
+//    boolean isNotQualified() {
+//        return false
+//    }
     public void beforeOpen() {
         entity.putAll(parententity)
     }
-        
     public void afterOpen(){
         loadtagbalayalinfo()
+        if(entity.state == 'NOTQUALIFIED'){
+            isNotQualified = true
+        }
     }
     public void beforeSave(o){
         if (o == 'create'){
@@ -120,6 +126,25 @@ class  TagbalayHouseholdInfoController extends CrudFormModel{
                 entity.activemembers.add(newhead);
                 println entity.activemembers;
             }
+        }
+    }
+    
+    def settoqualifiedasmis(){
+        def reason = MsgBox.prompt('Enter Reason')
+        if (reason){
+            svc.updateASMISstate(entity,reason)
+            MsgBox.alert("ASMIS profile qualified.");
+            isNotQualified = false;
+            binding.refresh();
+        }
+    }
+    def settonotqualifiedasmis(){
+        def reason = MsgBox.prompt('Enter Reason')
+        if (reason){
+            svc.updateASMISstate(entity,reason)
+            MsgBox.alert("ASMIS profile disqualified.");
+            isNotQualified = true;
+            binding.refresh();
         }
     }
     public void afterCreate(){
