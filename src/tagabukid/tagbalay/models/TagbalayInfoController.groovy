@@ -80,7 +80,7 @@ class TagbalayInfoController{
             p.findBy = [ 'controlno':barcodeid];
             entity =  querySvc.findFirst( p );
         }
-        title = entity.controlno + " - " + entity.tagbalay.name
+        title = entity.controlno + " - " + entity.tagbalay.name + " (" + entity.state + ")"
         entity = persistenceSvc.read([ _schemaname: 'tagbalay', objid: entity.objid])
         entity.tagbalay.putAll(persistenceSvc.read([ _schemaname: "entity"+entity.tagbalay.type.toLowerCase(), objid: entity.tagbalay.objid])) 
         loadSections('open');
