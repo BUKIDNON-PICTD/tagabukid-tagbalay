@@ -5,6 +5,8 @@ import com.rameses.osiris2.common.*
 import com.rameses.common.*;
 import com.rameses.seti2.models.*;
 import com.rameses.util.*;
+import java.rmi.server.*
+import tagabukid.utils.*;
         
 class  TagbalayHouseholdInfoController extends CrudFormModel{
     @Binding
@@ -16,7 +18,9 @@ class  TagbalayHouseholdInfoController extends CrudFormModel{
     @Caller
     def maincontroller
     
-        
+    // @Env
+	// def env;
+
     @Service("PersistenceService")
     def persistenceSvc;
     
@@ -66,7 +70,9 @@ class  TagbalayHouseholdInfoController extends CrudFormModel{
     boolean isShowNavigation(){
         return false
     }
+    
     def isNotQualified = false
+    // def state = "NOTQUALIFIED"
 //    boolean isNotQualified() {
 //        return false
 //    }
@@ -75,16 +81,18 @@ class  TagbalayHouseholdInfoController extends CrudFormModel{
     }
     public void afterOpen(){
         loadtagbalayalinfo()
+       
         if(entity.state == 'NOTQUALIFIED'){
             isNotQualified = true
         }
+
     }
     public void beforeSave(o){
         if (o == 'create'){
             binding.refresh();
             def individual = persistenceSvc.read([ _schemaname: "entity"+entity.tagbalay.type.toLowerCase(), objid: entity.tagbalay.objid]).findAll{it.value!=null};
             def tagbalay = entity.tagbalay;
-         
+
             if (!individual.middlename) throw new Exception('Middlename is required');
             
             entity.tagbalay = tagbalay + individual;
@@ -97,8 +105,24 @@ class  TagbalayHouseholdInfoController extends CrudFormModel{
                 height : entity.height,
                 weight : entity.weight,
                 relation: 'PANGULO'
-                
             ]
+            entity.verify[0] = [
+                objid                           : 'VE' + new java.rmi.server.UID(),
+                parentid                        : entity.objid,
+                date                            : dtSvc.getServerDate(),
+                state                           : 'NOTQUALIFIED',
+                remarks                         : 'NEW MEMBER',
+                recordlog   : [
+                    datecreated : dtSvc.getServerDate(),
+                    createdbyuser : OsirisContext.env.FULLNAME,
+                    createdbyuserid : OsirisContext.env.USERID,
+                    dateoflastupdate : dtSvc.getServerDate(),
+                    lastupdatedbyuser : OsirisContext.env.FULLNAME,
+                    lastupdatedbyuserid : OsirisContext.env.USERID,
+                ]
+            ]
+            // verifyloglist()
+
         }else if (o == 'update'){
             def individual = persistenceSvc.read([ _schemaname: "entity"+entity.tagbalay.type.toLowerCase(), objid: entity.tagbalay.objid]).findAll{it.value!=null};
             def tagbalay = entity.tagbalay;
@@ -124,29 +148,61 @@ class  TagbalayHouseholdInfoController extends CrudFormModel{
                     relation: 'PANGULO'
                 ]
                 entity.activemembers.add(newhead);
-                println entity.activemembers;
+                // println entity.activemembers;
             }
         }
     }
-    
-    def settoqualifiedasmis(){
+
+    def settoqualifiedasmis(o){
         def reason = MsgBox.prompt('Enter Reason')
         if (reason){
             svc.updateASMISstate(entity,reason)
+            verifyloglist(reason)
             MsgBox.alert("ASMIS profile qualified.");
+            
             isNotQualified = false;
+            
             binding.refresh();
         }
     }
-    def settonotqualifiedasmis(){
+    def settonotqualifiedasmis(o){
         def reason = MsgBox.prompt('Enter Reason')
         if (reason){
             svc.updateASMISstate(entity,reason)
+            verifyloglist(reason)
             MsgBox.alert("ASMIS profile disqualified.");
+            
             isNotQualified = true;
+            
             binding.refresh();
         }
     }
+    def state = "NOTQUALIFIED"
+    def verifyloglist(reason){
+        if (entity.state == "NOTQUALIFIED"){
+            state = "QUALIFIED"
+        }else {
+            state = "NOTQUALIFIED"
+        }
+        def newverify = [
+                objid                           : 'VE' + new java.rmi.server.UID(),
+                parentid                        : entity.objid,
+                date                            : dtSvc.getServerDate(),
+                state                           : state,
+                remarks                         : (reason?reason: 'NEW MEMBER'),
+                recordlog   : [
+                    datecreated : dtSvc.getServerDate(),
+                    createdbyuser : OsirisContext.env.FULLNAME,
+                    createdbyuserid : OsirisContext.env.USERID,
+                    dateoflastupdate : dtSvc.getServerDate(),
+                    lastupdatedbyuser : OsirisContext.env.FULLNAME,
+                    lastupdatedbyuserid : OsirisContext.env.USERID,
+                ]
+            ]
+        newverify._schemaname = 'tagbalay_verify'
+        persistenceSvc.create(newverify)
+    }
+
     public void afterCreate(){
         entity.putAll(parententity);
         
