@@ -19,7 +19,7 @@
 
         String title = 'Tagbalay List'
 
-        String reportName = 'test/maguuma/reports/list_of_facility.jasper';
+  AsyncReportController
 
         void buildReportData(entity, asyncHandler){
             svc.getTagbalayList(entity, asyncHandler)
@@ -35,23 +35,23 @@
         
         }
         
-        <!-- def getCommodity(){
+        def getCommodity(){
             def c = svc.getCommodity();
             if(c) return c;
             return [];
-        } -->
+        }
         
-         <!-- def getCommoditytype(){
+         def getCommoditytype(){
             if (! entity.commodity)
                 return [];
             return svc.getCommodityType(entity.commodity?.objid);
-        } -->
+        }
 
-        <!-- def getTs(){
+        def getTs(){
             def ts = svc.getTenurialstatus();
             if(ts) return ts;
             return [];
-        } -->
+        }
         
         def formControl = [
             getFormControls: {

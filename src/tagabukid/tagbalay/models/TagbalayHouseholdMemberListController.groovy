@@ -107,31 +107,31 @@ class  TagbalayHouseholdMemberListController{
                 weight: 0
             ]
         },
-        onColumnUpdate: {item,colname-> 
-            if (colname == 'member') { 
-                def o = entity.activemembers.find{ it.member.objid == item.member.objid } 
-                if (o) throw new Exception('This member already exist in the list. Please select another one.'); 
-            } 
-//            if (colname == 'member') { 
-//                if (entity.tagbalay.pangulo.objid ==  item.member.objid) throw new Exception('Dili pwede pilion ang PANGULO sa pamilya'); 
-//            }
-            if (colname == 'relation') {
-                if (item.relation == 'PANGULO'){ 
-                    throw new Exception('Dili pwede nga duha ang PANGULO sa pamilya.');
-                }
-                else{
-                    def updateitem = [];
-                    def schemaname = 'tagbalay_active_member'; 
-                    updateitem = persistenceSvc.read([ _schemaname: schemaname, objid: item.objid ]);
-                    def entityschemaname = 'entityindividual';
-                    updateitem.member = persistenceSvc.read([ _schemaname: entityschemaname, objid: updateitem.member.objid ]); 
-                    updateitem._schemaname = 'tagbalay_active_member';
-                    updateitem.relation = item.relation;
-                    persistenceSvc.save(updateitem);
-                }
+//         onColumnUpdate: {item,colname-> 
+//             if (colname == 'member') { 
+//                 def o = entity.activemembers.find{ it.member.objid == item.member.objid } 
+//                 if (o) throw new Exception('This member already exist in the list. Please select another one.'); 
+//             } 
+// //            if (colname == 'member') { 
+// //                if (entity.tagbalay.pangulo.objid ==  item.member.objid) throw new Exception('Dili pwede pilion ang PANGULO sa pamilya'); 
+// //            }
+//             if (colname == 'relation') {
+//                 if (item.relation == 'PANGULO'){ 
+//                     throw new Exception('Dili pwede nga duha ang PANGULO sa pamilya.');
+//                 }
+//                 else{
+//                     def updateitem = [];
+//                     def schemaname = 'tagbalay_active_member'; 
+//                     updateitem = persistenceSvc.read([ _schemaname: schemaname, objid: item.objid ]);
+//                     def entityschemaname = 'entityindividual';
+//                     updateitem.member = persistenceSvc.read([ _schemaname: entityschemaname, objid: updateitem.member.objid ]);
+//                     updateitem._schemaname = 'tagbalay_active_member';
+//                     updateitem.relation = item.relation;
+//                     persistenceSvc.save(updateitem);
+//                 }
                 
-            }
-        },
+//             }
+//         },
         onAddItem: {item-> 
             //specific lang ang member dapat individual lang
             def schemaname = 'entityindividual'; 

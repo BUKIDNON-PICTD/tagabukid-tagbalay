@@ -93,7 +93,7 @@ class  TagbalayHouseholdInfoController extends CrudFormModel{
             def individual = persistenceSvc.read([ _schemaname: "entity"+entity.tagbalay.type.toLowerCase(), objid: entity.tagbalay.objid]).findAll{it.value!=null};
             def tagbalay = entity.tagbalay;
 
-            if (!individual.middlename) throw new Exception('Middlename is required');
+            // if (!individual.middlename) throw new Exception('Middlename is required');
             
             entity.tagbalay = tagbalay + individual;
             entity.controlno = svc.getControlNo(entity);
