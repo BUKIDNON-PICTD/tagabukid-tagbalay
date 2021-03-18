@@ -15,9 +15,9 @@
         </folder>  
     </folder> 
     <folder id="menucategory">
-        <folder id="tagbalay" caption="Citizen" icon="home/icons/citizenmaster.png">
-           <folder id="citizen" caption="Citizen Profile" index="1" icon="home/icons/masterfiles.png"/>
-           <folder id="master" caption="Master File" index="5" icon="home/icons/masterfiles.png"/>
+        <folder id="tagbalay" caption="Tagbalay" icon="home/icons/citizenmaster.png">
+           <folder id="citizen" caption="Citizen Profile" index="1" icon="home/icons/citizen.png"/>
+           <folder id="master" caption="Master File" index="2" icon="home/icons/masterfiles.png"/>
         </folder>
     </folder>
 </folders>

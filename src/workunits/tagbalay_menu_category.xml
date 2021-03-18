@@ -1,7 +1,7 @@
 <workunit extends="com/rameses/menu/templates/MenuCategory.xml" context="tagbalay">
     <invokers>
         <invoker type="home.action" 
-                 caption="Citizen" icon="home/icons/citizenmaster.png"
+                 caption="Tagbalay" icon="home/icons/citizenmaster.png"
                  visibleWhen="#{self.hasChildren('menucategory/tagbalay')==true}" 
                  action="init" index="10001"/>
     </invokers> 

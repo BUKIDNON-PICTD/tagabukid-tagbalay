@@ -1,0 +1,9 @@
+
+<workunit extends="com/rameses/seti2/templates/CrudList.xml" 
+schemaName="tagbalay_master_electoral_term"
+cols="acronym,description,termbeginning,termend" allowDelete="false">
+    <invokers>
+        <invoker folderid="/menucategory/tagbalay/master"  caption="Electoral Term" action="init" index="1"/>
+        <!-- <invoker folderid="/explorer/txn/tagbalay" caption="Citizen List" action="init" index="1" role="SHARED"/>   -->
+    </invokers>
+</workunit>

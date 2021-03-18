@@ -1,0 +1,15 @@
+
+<workunit schemaName="master_electoral_term">
+    <invokers>
+        <invoker type="tagbalay_master_electoral_term:create" caption="New Electoral Term" action="create" target="window"/>
+        <invoker type="tagbalay_master_electoral_term:open" caption="Electoral Term" action="open" target="window"/>
+        <!-- <invoker type="hrmisfund:create" caption="New Fund" action="create" role="MASTER"/>
+        <invoker type="hrmisfund:open" caption="Fund" action="open" role="MASTER"/> -->
+        <invoker type="formActions" caption="Approve" action="approve" 
+                 visibleWhen="#{allowApprove==true}"/>
+    </invokers>
+    <code class="tagabukid.tagbalay.models.TagbalayMasterElectoralTermController" />
+    <pages>
+        <page template="tagabukid.tagbalay.views.MasterElectoraltermPage"/>
+    </pages>
+</workunit>
